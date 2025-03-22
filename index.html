@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mediai</title>
+  </head>
+  <body>
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="public/bg.webm" type="video/mp4" />
+      Your browser does not support HTML video.
+    </video>
+  </div>
+
+  <!-- Dark Overlay -->
+  <div class="overlay"></div>
+
+  <main>
+    <div class="content">
+      <!-- Place your logo here -->
+      <img src="logo.png" alt="Media Analysis Service Logo" class="logo" />
+
+      <h1>Media Analysis Services</h1>
+      <p>
+        Offering cutting-edge solutions for
+        <strong>fingerprinting, similarity detection, recommendation systems, subtitling, and censorship</strong>
+        in your exclusive services for VOD, OTT, UGC, and more. These solutions
+        not only enhance user experience but also provide robust content
+        protection and compliance. Leverage our expertise to stay ahead
+        in an ever-evolving digital landscape.
+      </p>
+
+      <!-- Register / Login Buttons -->
+      <div class="buttons">
+        <button class="btn btn-register">Register</button>
+        <button class="btn btn-login">Login</button>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/landing/main.ts"></script>
+  </body>
+</html>

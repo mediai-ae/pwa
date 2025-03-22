@@ -1,0 +1,263 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Background video container */
+.video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind other content */
+  overflow: hidden;
+}
+
+/* Rotate the video 180°, fill background */
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(180deg);
+}
+
+/* Dark overlay for contrast */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+          rgba(0, 0, 0, 0.7),
+          rgba(0, 0, 0, 0.7)
+  );
+  z-index: -1; /* Over the video, under the content */
+}
+
+/* Main container: center content horizontally/vertically;
+   min-height used so it can stretch and scroll if needed */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* If content is taller, page will scroll */
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+/* Content styling */
+.content {
+  color: #ffffff;
+  text-align: center; /* center text horizontally */
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+/* Logo styling */
+.logo {
+  max-width: 200px;   /* Adjust as needed */
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Headline and paragraph remain same size on all devices */
+.content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.content p {
+  font-size: 1.2rem;  /* does NOT shrink in responsive mode */
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Buttons row */
+.buttons {
+  display: flex;
+  gap: 2rem;          /* space between buttons */
+  justify-content: center;
+  flex-wrap: wrap;    /* if screen too narrow, move buttons to new line */
+}
+
+/* Button styles: two different colors with hover */
+.btn {
+  cursor: pointer;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: 0.2s ease;
+  color: #fff;
+}
+/* "Register" is green */
+.btn-register {
+  background-color: #28a745;
+}
+.btn-register:hover {
+  background-color: #1e7e34;
+}
+/* "Login" is blue */
+.btn-login {
+  background-color: #007BFF;
+}
+.btn-login:hover {
+  background-color: #0056b3;
+}
+
+/* Optional: you can use a media query if needed for other layout tweaks */
+@media (max-width: 768px) {
+  .content {
+    max-width: 90%; /* more space on smaller screens */
+  }
+}
+
+
+/*dashboard*/
+.header {
+  background: #283347;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header h1 { margin: 0; }
+.header .actions button {
+  background: #3e4c66;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tabs {
+  display: flex;
+  background: #2c3b55;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: #fff;
+}
+.tab.active {
+  background: #394263;
+  border-bottom: 2px solid #6b78a7;
+  font-weight: bold;
+}
+.content-area { padding: 20px; }
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.content-table thead tr { background-color: #394263; }
+.content-table th, .content-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  vertical-align: middle;
+  text-align: center;
+  color: #ddd;
+}
+.content-table th { font-weight: bold; color: #fff; }
+.rga-tag { font-weight: bold; padding: 2px 6px; border-radius: 4px; color: white; }
+.rga-r { background-color: red; }
+.rga-g { background-color: green; }
+.rga-a { background-color: orange; }
+.rga-na { background-color: gray; }
+.blur-r { filter: blur(5px); }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.7);
+}
+.modal-content {
+  background: #2c3b55;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1200px;
+  position: relative;
+  color: #fff;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+#adAnalysisModal .modal-content { background: #2c3b55; }
+.close {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn {
+  background: #3e4c66;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#applyChangesBtn { background-color: green; }
+#cancelChangesBtn { background-color: red; }
+.drag-drop {
+  border: 2px dashed #5a6ea8;
+  border-radius: 5px;
+  padding: 30px;
+  text-align: center;
+  color: #5a6ea8;
+  margin-bottom: 15px;
+}
+input[type="file"] { display: none; }
+#imageSearchFile { display: none; }
+.progress-container {
+  width: 100%;
+  background-color: #394263;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: none;
+}
+.progress-bar {
+  width: 0%;
+  height: 20px;
+  background-color: #6b78a7;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+}
+#subtitleGenerationModal .modal-content {
+  background: #2c3b55;
+  color: #fff;
+  max-width: 500px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}

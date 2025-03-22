@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
+
+body {
+  font-family: 'Tahoma', sans-serif;
+  background: #1c2533;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  color: #ffffff;
+}
+
+.header {
+  background: #283347;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.actions button {
+  background: #3e4c66;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.tabs {
+  display: flex;
+  background: #2c3b55;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: #fff;
+}
+
+.tab.active {
+  background: #394263;
+  border-bottom: 2px solid #6b78a7;
+  font-weight: bold;
+}
+
+.content-area {
+  padding: 20px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background: #2c3b55;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1200px;
+  position: relative;
+  color: #fff;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
