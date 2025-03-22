@@ -23,8 +23,8 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Check out dev branch
-        run: git checkout dev
+      - name: Check out main branch
+        run: git checkout main
       # Step 2: Set up Node.js and install dependencies
       - name: Set up Node.js
         uses: actions/setup-node@v2
