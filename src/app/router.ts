@@ -37,19 +37,19 @@ const router = createRouter({
       ],
     },
     {
-      path: '/app/login',
-      name: 'login',
+      path: '/app/sign-in',
+      name: 'sign-in',
       component: () => import('@/app/views/Login.vue'),
     },
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const requiresAuth = to.meta.middleware === 'auth';
   const isLoggedIn = !!localStorage.getItem('user');
 
   if (requiresAuth && !isLoggedIn) {
-    next({ name: 'login' });
+    next({ name: 'sign-in' });
     // next()
   } else {
     next();

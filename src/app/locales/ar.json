@@ -8,14 +8,14 @@
     "recommend": "توصية"
   },
   "login": {
-    "title": "مرحباً بك في Mediai",
-    "subtitle": "يرجى تسجيل الدخول للوصول إلى لوحة التحكم.",
+    "title": "مرحبًا بك في ميدياي",
+    "subtitle": "يرجى تسجيل الدخول للوصول إلى التطبيق.",
     "or": "أو",
-    "emailPlaceholder": "البريد الإلكتروني",
+    "usernamePlaceholder": "اسم المستخدم",
     "passwordPlaceholder": "كلمة المرور",
-    "loginButton": "تسجيل الدخول بالبريد الإلكتروني",
-    "googleButton": "تسجيل الدخول باستخدام Google",
-    "googleError": "فشل تسجيل الدخول عبر Google",
-    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+    "loginButton": "تسجيل الدخول باسم المستخدم",
+    "googleButton": "تسجيل الدخول عبر جوجل",
+    "googleError": "فشل تسجيل الدخول عبر جوجل",
+    "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة"
   }
 }

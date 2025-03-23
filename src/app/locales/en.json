@@ -11,11 +11,11 @@
     "title": "Welcome to Mediai",
     "subtitle": "Please sign in to access your app.",
     "or": "OR",
-    "emailPlaceholder": "Email",
+    "usernamePlaceholder": "Username",
     "passwordPlaceholder": "Password",
-    "loginButton": "Login with Email",
-    "googleButton": "login with Google",
+    "loginButton": "Login with Username",
+    "googleButton": "Login with Google",
     "googleError": "Google login failed",
-    "invalidCredentials": "Invalid email or password"
+    "invalidCredentials": "Invalid username or password"
   }
 }
