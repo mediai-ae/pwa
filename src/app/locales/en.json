@@ -9,7 +9,7 @@
   },
   "login": {
     "title": "Welcome to Mediai",
-    "subtitle": "Please sign in to access your dashboard.",
+    "subtitle": "Please sign in to access your app.",
     "or": "OR",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Password",

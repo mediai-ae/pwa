@@ -1,12 +1,9 @@
 <template>
   <div>
     text
-    <hr>
+    <hr />
     br
-    <br>
-    csdcdscsdcsd
-    dscdsdds
-
+    <br />
+    csdcdscsdcsd dscdsdds
   </div>
 </template>
-
