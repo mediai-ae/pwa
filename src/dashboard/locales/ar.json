@@ -1,0 +1,10 @@
+{
+  "header": {
+    "title": "معرض المحتوى"
+  },
+  "buttons": {
+    "upload": "تحميل",
+    "search": "بحث",
+    "recommend": "توصية"
+  }
+}

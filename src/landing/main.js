@@ -1,1 +1,1 @@
-import "@/landing/style.css";
+import "./index.css";

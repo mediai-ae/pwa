@@ -1,0 +1,10 @@
+{
+  "header": {
+    "title": "Content Gallery"
+  },
+  "buttons": {
+    "upload": "Upload",
+    "search": "Search",
+    "recommend": "Recommend"
+  }
+}

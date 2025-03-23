@@ -1,44 +1,52 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mediai</title>
-  </head>
-  <body>
-  <div class="video-bg">
-    <video autoplay muted loop playsinline>
-      <source src="public/bg.webm" type="video/mp4" />
-      Your browser does not support HTML video.
+</head>
+<body class="relative bg-black text-white font-sans">
+
+<!-- Background Video -->
+<div class="absolute inset-0 -z-10 overflow-hidden">
+    <video autoplay muted loop playsinline class="w-full h-full object-cover rotate-180">
+        <source src="/bg.webm" type="video/mp4" />
+        Your browser does not support HTML video.
     </video>
-  </div>
+    <div class="absolute inset-0 bg-black/70"></div>
+</div>
 
-  <!-- Dark Overlay -->
-  <div class="overlay"></div>
+<!-- Main Content -->
+<main class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+    <div class="max-w-3xl space-y-6">
+        <!-- Logo -->
+        <img src="/logo.png" alt="Media Analysis Logo" class="w-40 mx-auto mb-4" />
 
-  <main>
-    <div class="content">
-      <!-- Place your logo here -->
-      <img src="logo.png" alt="Media Analysis Service Logo" class="logo" />
+        <!-- Heading -->
+        <h1 class="text-3xl sm:text-4xl font-bold">Media Analysis Services</h1>
 
-      <h1>Media Analysis Services</h1>
-      <p>
-        Offering cutting-edge solutions for
-        <strong>fingerprinting, similarity detection, recommendation systems, subtitling, and censorship</strong>
-        in your exclusive services for VOD, OTT, UGC, and more. These solutions
-        not only enhance user experience but also provide robust content
-        protection and compliance. Leverage our expertise to stay ahead
-        in an ever-evolving digital landscape.
-      </p>
+        <!-- Description -->
+        <p class="text-lg text-gray-300 leading-relaxed">
+            Offering cutting-edge solutions for
+            <strong class="text-white">fingerprinting, similarity detection, recommendation systems, subtitling, and censorship</strong>
+            in your exclusive services for VOD, OTT, UGC, and more.
+            These solutions enhance user experience and ensure robust content protection and compliance.
+        </p>
 
-      <!-- Register / Login Buttons -->
-      <div class="buttons">
-        <button class="btn btn-register">Register</button>
-        <button class="btn btn-login">Login</button>
-      </div>
+        <!-- Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+            <button class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition">
+                Register
+            </button>
+            <button class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition">
+                Login
+            </button>
+        </div>
     </div>
-  </main>
-  <script type="module" src="/src/landing/main.ts"></script>
-  </body>
+</main>
+
+<!-- Vite Entry -->
+<script type="module" src="/src/landing/main.ts"></script>
+</body>
 </html>
