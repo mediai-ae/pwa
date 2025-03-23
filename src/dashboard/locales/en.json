@@ -6,5 +6,16 @@
     "upload": "Upload",
     "search": "Search",
     "recommend": "Recommend"
+  },
+  "login": {
+    "title": "Welcome to Mediai",
+    "subtitle": "Please sign in to access your dashboard.",
+    "or": "OR",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login with Email",
+    "googleButton": "login with Google",
+    "googleError": "Google login failed",
+    "invalidCredentials": "Invalid email or password"
   }
 }

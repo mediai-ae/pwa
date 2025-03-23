@@ -6,5 +6,16 @@
     "upload": "تحميل",
     "search": "بحث",
     "recommend": "توصية"
+  },
+  "login": {
+    "title": "مرحباً بك في Mediai",
+    "subtitle": "يرجى تسجيل الدخول للوصول إلى لوحة التحكم.",
+    "or": "أو",
+    "emailPlaceholder": "البريد الإلكتروني",
+    "passwordPlaceholder": "كلمة المرور",
+    "loginButton": "تسجيل الدخول بالبريد الإلكتروني",
+    "googleButton": "تسجيل الدخول باستخدام Google",
+    "googleError": "فشل تسجيل الدخول عبر Google",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
   }
 }

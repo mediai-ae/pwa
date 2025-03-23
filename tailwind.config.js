@@ -11,18 +11,13 @@ export default {
                 tahoma: ['Tahoma', 'sans-serif'],
             },
             colors: {
-                primary: {
-                    light: '#f3f4f6',
-                    dark: '#1c2533',
-                },
-                secondary: {
-                    light: '#e5e7eb',
-                    dark: '#2c3b55',
-                },
-                accent: {
-                    DEFAULT: '#6b78a7',
-                    soft: '#3e4c66',
-                },
+                'primary-dark': '#2c3b55',
+                'secondary-dark': '#394263',
+                'light-bg': '#f9fafb',
+                'light-text': '#111827',
+                'accent': '#0066cc',
+                'accent-soft': '#0055aa',
+                'accent-dark': '#004080',
                 rga: {
                     r: 'red',
                     g: 'green',
