@@ -3,9 +3,12 @@
     "title": "Content Gallery"
   },
   "buttons": {
+    "chooseFile": "Choose File",
     "upload": "Upload",
+    "uploading": "Uploading...",
     "search": "Search",
-    "recommend": "Recommend"
+    "recommend": "Recommend",
+    "close": "Close"
   },
   "login": {
     "title": "Welcome to Mediai",
