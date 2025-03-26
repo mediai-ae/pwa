@@ -36,13 +36,31 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import { useMediaStore } from '@/app/stores/media';
+import { storeToRefs } from 'pinia';
 
 const store = useMediaStore();
-const { fetchMedia, mediaItems,  loading, error } = store;
+const { fetchMedia } = store;
+const { mediaItems, loading, error } = storeToRefs(store);
 
-onMounted(() => {
-  fetchMedia('image');
+const route = useRoute();
+
+// ✅ Determine media type based on current route name
+const mediaType = computed(() => {
+  switch (route.name) {
+    case 'images': return 'image';
+    case 'texts': return 'text';
+    case 'audios': return 'audio';
+    case 'videos': return 'video';
+    default: return '';
+  }
 });
+
+watch(mediaType, (type) => {
+  console.log('Fetching media type:', type); // ✅ add log
+  fetchMedia(type);
+}, { immediate: true });
+
 </script>
