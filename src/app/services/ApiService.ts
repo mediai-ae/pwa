@@ -22,38 +22,39 @@ class ApiService {
     ApiService.vueInstance.use(VueAxios, axios);
     ApiService.vueInstance.axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 
-    ApiService.vueInstance.axios.defaults.headers.common["X-App"] = "_Web";
+    ApiService.setHeader();
+
     ApiService.vueInstance.axios.interceptors.response.use(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        if (
-          error.request &&
-          error.request.status === 0 &&
-          error.request.response === ""
-        ) {
-          if (!window.navigator.onLine) {
-           alert("Check Your Internet Connection and Refresh Page")
-          } else {
-           alert("Check Your VPN Connection or our Api service Is probably Down")
+        (response) => {
+          return response;
+        },
+        (error) => {
+          if (
+              error.request &&
+              error.request.status === 0 &&
+              error.request.response === ""
+          ) {
+            if (!window.navigator.onLine) {
+              alert("Check Your Internet Connection and Refresh Page");
+            } else {
+              alert("Check Your VPN Connection or our API service is probably down");
+            }
+          } else if (error.response && error.response.status === 401) {
+            const authStore = useAuthStore();
+            authStore.purgeAuth();
+          } else if (
+              error.response &&
+              ![404, 401].includes(error.response.status)
+          ) {
+            const message = error.response.data.message
+                ? error.response.data.message
+                : error.response.data.error;
+
+            alert(message);
           }
-        } else if (error.response && error.response.status === 401) {
-          const authStore = useAuthStore();
-          authStore.purgeAuth();
-        } else if (
-          error.response &&
-          ![404, 401].includes(error.response.status)
-        ) {
-          const message = error.response.data.message
-            ? error.response.data.message
-            : error.response.data.error;
 
-          alert(message)
+          return Promise.reject(error);
         }
-
-        return Promise.reject(error);
-      }
     );
   }
 

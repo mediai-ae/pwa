@@ -21,17 +21,8 @@
         <router-link class="tab flex-1 py-3" :to="{ name: 'videos' }" active-class="active">Videos</router-link>
       </div>
 
-      <!-- Main Content -->
       <main class="p-4 transition-all duration-300">
-        <!-- Image Grid -->
-        <div v-if="images.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-          <img
-              v-for="img in images"
-              :key="img"
-              :src="img"
-              class="rounded shadow hover:scale-105 transition"
-          />
-        </div>
+        <router-view />
       </main>
 
       <!-- Upload Modal -->
@@ -41,12 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
 import Modal from '@/app/components/Modal.vue';
 import Dropdown from '@/app/components/Dropdown.vue';
-import { useImageStore } from '@/app/stores/image';
 
 const { locale } = useI18n();
 
@@ -54,8 +44,6 @@ const isDark = ref(true);
 const activeModal = ref('');
 const dropdownVisible = ref(false);
 
-const store = useImageStore();
-const images = store.images;
 
 function toggleDark() {
   isDark.value = !isDark.value;
@@ -79,9 +67,6 @@ function toggleDropdown() {
   dropdownVisible.value = !dropdownVisible.value;
 }
 
-onMounted(() => {
-  store.fetchImages();
-});
 </script>
 
 <style scoped>

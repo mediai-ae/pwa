@@ -17,22 +17,22 @@ const router = createRouter({
         {
           path: '/app/texts',
           name: 'texts',
-          component: () => import('@/app/views/Texts.vue'),
+          component: () => import('@/app/views/Text.vue'),
         },
         {
           path: '/app/images',
           name: 'images',
-          component: () => import('@/app/views/Images.vue'),
+          component: () => import('@/app/views/Image.vue'),
         },
         {
           path: '/app/audios',
           name: 'audios',
-          component: () => import('@/app/views/Images.vue'),
+          component: () => import('@/app/views/Audio.vue'),
         },
         {
           path: '/app/videos',
           name: 'videos',
-          component: () => import('@/app/views/Texts.vue'),
+          component: () => import('@/app/views/Video.vue'),
         },
       ],
     },
