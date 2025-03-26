@@ -26,6 +26,11 @@
             {{ tag }}
           </span>
         </p>
+        <div v-if="item.media_type === 'video'" class="mt-4 flex flex-wrap gap-2">
+          <button @click="analyzeContent(item.filename)" class="btn">Analyze Content</button>
+          <button @click="analyzeAd(item.filename)" class="btn">Analyze Ad</button>
+          <button @click="generateSubtitle(item.filename)" class="btn">Generate Subtitle</button>
+        </div>
       </div>
     </div>
 
@@ -35,19 +40,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useMediaStore } from '@/app/stores/media';
 import { storeToRefs } from 'pinia';
 
 const store = useMediaStore();
-const { fetchMedia } = store;
+const { fetchMedia, analyzeContent, analyzeAd, generateSubtitle } = store;
 const { mediaItems, loading, error } = storeToRefs(store);
 
 const route = useRoute();
-
-// ✅ Determine media type based on current route name
 const mediaType = computed(() => {
   switch (route.name) {
     case 'images': return 'image';
@@ -59,8 +62,12 @@ const mediaType = computed(() => {
 });
 
 watch(mediaType, (type) => {
-  console.log('Fetching media type:', type); // ✅ add log
   fetchMedia(type);
 }, { immediate: true });
-
 </script>
+
+<style scoped>
+.btn {
+  @apply px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded transition;
+}
+</style>

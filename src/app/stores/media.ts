@@ -16,11 +16,23 @@ export const useMediaStore = defineStore('media', () => {
             });
             mediaItems.value = response.data;
         } catch (err) {
-            error.value = 'error in get files';
+            error.value = 'Error fetching media files';
             console.error(err);
         } finally {
             loading.value = false;
         }
+    };
+
+    const analyzeContent = async (filename: string) => {
+        return ApiService.post('/analyze/content', { filename });
+    };
+
+    const analyzeAd = async (filename: string) => {
+        return ApiService.post('/analyze/ad', { filename });
+    };
+
+    const generateSubtitle = async (filename: string, language = 'en') => {
+        return ApiService.post('/subtitle/generate-full', { filename, target_language: language });
     };
 
     return {
@@ -28,5 +40,8 @@ export const useMediaStore = defineStore('media', () => {
         loading,
         error,
         fetchMedia,
+        analyzeContent,
+        analyzeAd,
+        generateSubtitle,
     };
 });
