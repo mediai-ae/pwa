@@ -17,7 +17,7 @@ export const useUploadStore = defineStore('upload', () => {
         progress.value = 0;
 
         try {
-            await ApiService.post('/upload', formData, {
+            const response = await ApiService.post('/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -27,9 +27,11 @@ export const useUploadStore = defineStore('upload', () => {
             });
 
             message.value = 'Upload successful!';
+            return response.data['media'];
         } catch (error) {
             console.error('Upload error:', error);
             message.value = 'Upload failed!';
+            return null;
         } finally {
             uploading.value = false;
         }

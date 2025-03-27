@@ -9,7 +9,7 @@
       <div v-for="item in mediaItems" :key="item.filename" class="border rounded p-4 shadow-sm">
         <img
             v-if="item.thumbnail"
-            :src="`/${item.thumbnail}`"
+            :src="`${item.thumbnail}`"
             alt="thumbnail"
             class="w-full h-40 object-cover rounded mb-2"
         />
