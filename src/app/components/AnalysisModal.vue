@@ -12,11 +12,11 @@
         <table class="w-full text-center border-collapse">
           <thead>
           <tr class="bg-gray-200 dark:bg-gray-700 text-sm">
-            <th class="p-2">فریم</th>
-            <th class="p-2">زمان (ثانیه)</th>
-            <th class="p-2">هشتگ‌ها</th>
-            <th class="p-2">RGA</th>
-            <th class="p-2">عملیات</th>
+            <th class="p-2">{{ $t('table.frame') }}</th>
+            <th class="p-2">{{ $t('table.time') }}</th>
+            <th class="p-2">{{ $t('table.hashtags') }}</th>
+            <th class="p-2">{{ $t('table.rga') }}</th>
+            <th class="p-2">{{ $t('table.actions') }}</th>
           </tr>
           </thead>
           <tbody>
@@ -30,40 +30,41 @@
             </td>
             <td class="p-2">{{ scene.frame_time }}</td>
             <td class="p-2">
-              {{ scene.hashtags?.length ? scene.hashtags.join(', ') : '----' }}
+              {{ scene.hashtags?.length ? scene.hashtags.join(', ') : $t('messages.noHashtags') }}
             </td>
             <td class="p-2">
-          <span
-              :class="[
-              'rga-tag text-white font-semibold px-3 py-1 rounded-full text-xs',
-              {
-                'bg-red-600': scene.rga === 'High',
-                'bg-yellow-500': scene.rga === 'Medium',
-                'bg-green-600': scene.rga === 'Low'
-              }
-            ]"
-          >
-            {{ scene.rga }}
-          </span>
+                <span
+                    :class="[
+                    'rga-tag text-white font-semibold px-3 py-1 rounded-full text-xs',
+                    {
+                      'bg-red-600': scene.rga === 'High',
+                      'bg-yellow-500': scene.rga === 'Medium',
+                      'bg-green-600': scene.rga === 'Low'
+                    }
+                  ]"
+                >
+                  {{ $t(`rga.${scene.rga.toLowerCase()}`) }}
+                </span>
             </td>
             <td class="p-2">
               <button
                   @click="$emit('approve', index)"
                   class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-xl mr-2 text-xs"
               >
-                تایید
+                {{ $t('buttons.approve') }}
               </button>
               <button
                   @click="$emit('reject', index)"
                   class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-xl text-xs"
               >
-                رد
+                {{ $t('buttons.reject') }}
               </button>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
+
       <p v-else class="text-center text-gray-600 dark:text-gray-300">
         {{ $t('messages.noAnalysisData') }}
       </p>
@@ -83,22 +84,11 @@
 </template>
 
 <script setup lang="ts">
-
 defineProps<{
   analysis: Array<any>
 }>();
 
 defineEmits(['close', 'approve', 'reject']);
-
-function onApprove(index: number) {
-  // Emit to parent if needed
-  console.log('Approved frame', index);
-}
-
-function onReject(index: number) {
-  // Emit to parent if needed
-  console.log('Rejected frame', index);
-}
 </script>
 
 <style scoped>

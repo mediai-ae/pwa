@@ -9,7 +9,9 @@
     "search": "Search",
     "recommend": "Recommend",
     "chooseAnother": "Choose Another File",
-    "close": "Close"
+    "close": "Close",
+    "approve": "Approve",
+    "reject": "Reject"
   },
   "login": {
     "title": "Welcome to Mediai",
@@ -21,5 +23,24 @@
     "googleButton": "Login with Google",
     "googleError": "Google login failed",
     "invalidCredentials": "Invalid username or password"
+  },
+  "titles": {
+    "analysisResults": "Analysis Results"
+  },
+  "table": {
+    "frame": "Frame",
+    "time": "Time (s)",
+    "hashtags": "Hashtags",
+    "rga": "RGA",
+    "actions": "Actions"
+  },
+  "messages": {
+    "noAnalysisData": "No analysis data available.",
+    "noHashtags": "----"
+  },
+  "rga": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
   }
 }

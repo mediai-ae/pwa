@@ -74,7 +74,7 @@ async function handleModal(type: 'content' | 'ad' | 'subtitle', id: string) {
     if (type === 'content') {
       response = await analyzeContent(id);
       console.log(response.data)
-      openModal?.('content', response.data.analysis);
+      openModal?.('content', response.data);
     } else if (type === 'ad') {
       response = await analyzeAd(id);
       console.log(response.data)
