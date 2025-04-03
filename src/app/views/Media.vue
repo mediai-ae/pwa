@@ -23,13 +23,14 @@
               :key="tag"
               class="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded mr-1 text-xs"
           >
-            {{ tag }}
+            #{{ tag }}
           </span>
         </p>
+
         <div v-if="item.media_type === 'video'" class="mt-4 flex flex-wrap gap-2">
-          <button @click="analyzeContent(item.filename)" class="btn">Analyze Content</button>
-          <button @click="analyzeAd(item.filename)" class="btn">Analyze Ad</button>
-          <button @click="generateSubtitle(item.filename)" class="btn">Generate Subtitle</button>
+          <button @click="handleModal('content', item.id)" class="btn">Analyze Content</button>
+          <button @click="handleModal('ad', item.id)" class="btn">Analyze Ad</button>
+          <button @click="handleModal('subtitle', item.id)" class="btn">Generate Subtitle</button>
         </div>
       </div>
     </div>
@@ -41,10 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { useMediaStore } from '@/app/stores/media';
 import { storeToRefs } from 'pinia';
+
+const openModal = inject('openModal') as (type: string, data: any) => void;
 
 const store = useMediaStore();
 const { fetchMedia, analyzeContent, analyzeAd, generateSubtitle } = store;
@@ -64,6 +67,34 @@ const mediaType = computed(() => {
 watch(mediaType, (type) => {
   fetchMedia(type);
 }, { immediate: true });
+
+async function handleModal(type: 'content' | 'ad' | 'subtitle', id: string) {
+  try {
+    let response;
+    if (type === 'content') {
+      response = await analyzeContent(id);
+      console.log(response.data)
+      openModal?.('content', response.data.analysis);
+    } else if (type === 'ad') {
+      response = await analyzeAd(id);
+      console.log(response.data)
+      openModal?.('ad', response.data.scene_data);
+    } else if (type === 'subtitle') {
+      response = await generateSubtitle(id);
+      console.log(response.data)
+
+      openModal?.('subtitle', {
+        jobId: response.data.job_id,
+        srtFile: response.data.srt_file,
+        language: response.data.detected_language,
+        pitchImage: response.data.pitch_image,
+        audioChunks: response.data.audio_chunks
+      });
+    }
+  } catch (error) {
+    console.error(`Error loading ${type} modal:`, error);
+  }
+}
 </script>
 
 <style scoped>

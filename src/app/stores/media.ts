@@ -23,16 +23,16 @@ export const useMediaStore = defineStore('media', () => {
         }
     };
 
-    const analyzeContent = async (filename: string) => {
-        return ApiService.post('/analyze/content', { filename });
+    const analyzeContent = async (id: string) => {
+        return ApiService.post('/analyze/video/' + id, { id });
     };
 
-    const analyzeAd = async (filename: string) => {
-        return ApiService.post('/analyze/ad', { filename });
+    const analyzeAd = async (id: string) => {
+        return ApiService.post('/analyze/ad/' + id, { id });
     };
 
-    const generateSubtitle = async (filename: string, language = 'en') => {
-        return ApiService.post('/subtitle/generate-full', { filename, target_language: language });
+    const generateSubtitle = async (id: string, language = 'en') => {
+        return ApiService.post('/subtitle/generate' + id, { id, target_language: language });
     };
 
     return {

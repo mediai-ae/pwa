@@ -25,8 +25,8 @@
         <router-view />
       </main>
 
-      <!-- Upload Modal -->
-      <Modal v-if="activeModal === 'upload'" type="upload" @close="closeModal" />
+      <!-- Modals -->
+      <UploadModal v-if="activeModal === 'upload'" type="upload" @close="closeModal" @upload-finished="handleUploadFinished" />
     </div>
   </div>
 </template>
@@ -35,9 +35,12 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
-import Modal from '@/app/components/Modal.vue';
+import UploadModal from '@/app/components/UploadModal.vue';
 import Dropdown from '@/app/components/Dropdown.vue';
+import {useMediaStore} from "@/app/stores/media";
 
+const mediaStore = useMediaStore();
+const { fetchMedia } = mediaStore;
 const { locale } = useI18n();
 
 const isDark = ref(true);
@@ -52,6 +55,10 @@ function toggleDark() {
 
 function changeLocale(lang: string) {
   locale.value = lang;
+}
+
+function handleUploadFinished(type: string) {
+    fetchMedia(type);
 }
 
 function openModal(name: string) {

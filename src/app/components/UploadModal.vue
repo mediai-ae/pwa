@@ -4,7 +4,7 @@
 
       <!-- Modal Title -->
       <h3 class="text-xl font-semibold text-center">
-        {{ type === 'upload' ? $t('buttons.upload') : $t('buttons.search') }}
+        {{ $t('buttons.upload') }}
       </h3>
 
       <!-- Upload Section -->
@@ -73,7 +73,7 @@ import { storeToRefs } from 'pinia';
 import { useUploadStore } from '@/app/stores/upload';
 
 defineProps<{ type: string }>();
-defineEmits(['close']);
+const emit = defineEmits(['close', 'upload-finished']);
 
 const file = ref<File | null>(null);
 const result = ref<any | null>(null);
@@ -95,7 +95,8 @@ async function onFileChange(e: Event) {
     if (res) {
       result.value = res;
 
-      // Parse nudity_score safely
+      emit('upload-finished', result.value?.media_type); // or use a more explicit prop if needed
+
       try {
         const parsed = JSON.parse(res.nudity_score.replace(/'/g, '"'));
         nudity.value = {
