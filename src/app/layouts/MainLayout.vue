@@ -6,12 +6,7 @@
           :locale="locale"
           @change-locale="changeLocale"
           @toggle-dark="toggleDark"
-          @open-modal="openModal"
-          @toggle-dropdown="toggleDropdown"
       />
-
-      <!-- Dropdown -->
-      <Dropdown v-if="dropdownVisible" />
 
       <!-- Tabs -->
       <div class="tabs flex text-center shadow transition text-black bg-gray-100 dark:text-white dark:bg-secondary-dark">
@@ -26,54 +21,46 @@
       </main>
 
       <!-- Modals -->
-      <UploadModal v-if="activeModal === 'upload'" type="upload" @close="closeModal" @upload-finished="handleUploadFinished" />
+      <Modals :active-modal="activeModal" :modal-data="modalData" @close="closeModal" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
-import UploadModal from '@/app/components/UploadModal.vue';
-import Dropdown from '@/app/components/Dropdown.vue';
-import {useMediaStore} from "@/app/stores/media";
+import Modals from '@/app/components/Modals.vue';
 
-const mediaStore = useMediaStore();
-const { fetchMedia } = mediaStore;
 const { locale } = useI18n();
-
 const isDark = ref(true);
+
+// Modal state
 const activeModal = ref('');
-const dropdownVisible = ref(false);
+const modalData = ref<any>(null);
 
+// Provide openModal
+function openModal(type: string, data: any = null) {
+  activeModal.value = type;
+  modalData.value = data;
+}
+function closeModal() {
+  activeModal.value = '';
+  modalData.value = null;
+}
 
+provide('openModal', openModal);
+
+// Dark mode
 function toggleDark() {
   isDark.value = !isDark.value;
   document.documentElement.classList.toggle('dark', isDark.value);
 }
 
+// Language
 function changeLocale(lang: string) {
   locale.value = lang;
 }
-
-function handleUploadFinished(type: string) {
-    fetchMedia(type);
-}
-
-function openModal(name: string) {
-  activeModal.value = name;
-  dropdownVisible.value = false;
-}
-
-function closeModal() {
-  activeModal.value = '';
-}
-
-function toggleDropdown() {
-  dropdownVisible.value = !dropdownVisible.value;
-}
-
 </script>
 
 <style scoped>

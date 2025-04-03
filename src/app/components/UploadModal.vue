@@ -71,9 +71,13 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUploadStore } from '@/app/stores/upload';
+import {useMediaStore} from "@/app/stores/media";
 
 defineProps<{ type: string }>();
 const emit = defineEmits(['close', 'upload-finished']);
+
+const mediaStore = useMediaStore();
+const { fetchMedia } = mediaStore;
 
 const file = ref<File | null>(null);
 const result = ref<any | null>(null);
@@ -109,6 +113,12 @@ async function onFileChange(e: Event) {
     }
   }
 }
+
+
+function handleUploadFinished(type: string) {
+  fetchMedia(type);
+}
+
 </script>
 
 <style scoped>
