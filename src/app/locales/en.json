@@ -19,7 +19,8 @@
     "analyzeAd": "Analyze Ad",
     "analyzingAd": "Analyzing Ad...",
     "generateSubtitle": "Generate Subtitle",
-    "generatingSubtitle": "Generating..."
+    "generatingSubtitle": "Generating...",
+    "downloadFinalSubtitle": "Download Final Subtitle"
   },
   "login": {
     "title": "Welcome to Mediai",
@@ -33,18 +34,47 @@
     "invalidCredentials": "Invalid username or password"
   },
   "titles": {
-    "analysisResults": "Analysis Results"
+    "analysisResults": "Analysis Results",
+    "sceneAnalysis": "Scene Analysis Results",
+    "generateSubtitle": "Generate Subtitle"
   },
   "table": {
     "frame": "Frame",
     "time": "Time (s)",
     "hashtags": "Hashtags",
     "rga": "RGA",
-    "actions": "Actions"
+    "actions": "Actions",
+    "sceneId": "Scene ID",
+    "keyFrame": "Key Frame",
+    "saliencyMap": "Saliency Map",
+    "emptySpace": "Empty Space",
+    "emotion": "Facial Emotion",
+    "billboards": "Billboards",
+    "saliencyScore": "Saliency Score",
+    "motionScore": "Motion",
+    "dominantColor": "Dominant Color",
+    "complementaryColor": "Complementary Color",
+    "score": "Score",
+    "isBest": "Best"
+  },
+  "labels": {
+    "rgaCategory": "RGA Category",
+    "nudityScore": "Nudity Score",
+    "sexy": "Sexy",
+    "porn": "Porn",
+    "hashtags": "Hashtags",
+    "yes": "Yes",
+    "selectLanguage": "Select Target Language",
+    "pitchContour": "Pitch Contour",
+    "cleanAudio": "Clean Audio (Noise Reduced)",
+    "originalSubtitle": "Original Subtitle",
+    "translatedSubtitle": "Translated Subtitle",
+    "download": "Download"
   },
   "messages": {
     "noAnalysisData": "No analysis data available.",
-    "noHashtags": "----"
+    "noHashtags": "----",
+    "none": "None"
   },
   "rga": {
     "high": "High",

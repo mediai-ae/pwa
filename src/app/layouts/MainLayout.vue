@@ -30,7 +30,7 @@
 import { ref, provide } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
-import Modals from '@/app/components/Modals.vue';
+import Modals from '@/app/components/Modals/Modals.vue';
 
 const { locale } = useI18n();
 const isDark = ref(true);

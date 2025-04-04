@@ -1,9 +1,20 @@
 <template>
-  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 animate-fadeIn">
-    <div class="w-full max-w-lg mx-4 p-6 bg-white dark:bg-secondary-dark text-black dark:text-white rounded-2xl shadow-2xl space-y-6">
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 animate-fadeIn px-2">
+    <div class="relative w-full max-w-lg bg-white dark:bg-secondary-dark text-black dark:text-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] p-4 sm:p-6 space-y-6">
+
+      <!-- Close Button -->
+      <button
+          @click="$emit('close')"
+          class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-white transition"
+          aria-label="Close"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10 3.636 5.05a1 1 0 011.414-1.414L10 8.586z" clip-rule="evenodd"/>
+        </svg>
+      </button>
 
       <!-- Modal Title -->
-      <h3 class="text-xl font-semibold text-center">
+      <h3 class="text-lg sm:text-2xl font-semibold text-center">
         {{ $t('buttons.upload') }}
       </h3>
 
@@ -24,7 +35,7 @@
               class="hidden"
               @change="onFileChange"
           />
-          <p v-if="file?.name" class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+          <p v-if="file?.name" class="mt-2 text-sm text-gray-700 dark:text-gray-300 truncate">
             📁 {{ file.name }}
           </p>
         </div>
@@ -32,20 +43,26 @@
         <!-- Progress Bar -->
         <div v-if="uploading" class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
           <div
-              class="bg-green-600 h-full transition-all duration-300"
+              class="bg-green-600 h-full transition-all duration-500"
               :style="{ width: progress + '%' }"
           ></div>
         </div>
 
         <!-- Upload Result -->
-        <div v-if="result" class="border-t pt-4 mt-4 space-y-2 text-sm">
-          <p><span class="font-semibold">📊 RGA Category:</span> {{ result.rga_category }}</p>
+        <div v-if="result" class="border-t pt-4 mt-4 space-y-2 text-sm text-left sm:text-base">
           <p>
-            <span class="font-semibold">🔞 Nudity Score:</span>
-            Sexy: {{ nudity.sexy }}% |
-            Porn: {{ nudity.porn }}%
+            <span class="font-semibold">📊 {{ $t('labels.rgaCategory') }}:</span>
+            {{ result.rga_category }}
           </p>
-          <p><span class="font-semibold">🏷️ Hashtags:</span> {{ result.hashtags || 'None' }}</p>
+          <p>
+            <span class="font-semibold">🔞 {{ $t('labels.nudityScore') }}:</span>
+            {{ $t('labels.sexy') }}: {{ nudity.sexy }}% |
+            {{ $t('labels.porn') }}: {{ nudity.porn }}%
+          </p>
+          <p>
+            <span class="font-semibold">🏷️ {{ $t('labels.hashtags') }}:</span>
+            {{ result.hashtags || $t('messages.none') }}
+          </p>
         </div>
 
         <!-- Upload Message -->
@@ -55,14 +72,15 @@
       </div>
 
       <!-- Action Buttons -->
-      <div class="flex justify-center gap-4 pt-2">
+      <div class="flex justify-center pt-2">
         <button
             @click="$emit('close')"
-            class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition font-medium"
+            class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition text-sm sm:text-base font-medium"
         >
           {{ $t('buttons.close') }}
         </button>
       </div>
+
     </div>
   </div>
 </template>
@@ -71,19 +89,18 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUploadStore } from '@/app/stores/upload';
-import {useMediaStore} from "@/app/stores/media";
+import { useMediaStore } from "@/app/stores/media";
 
 defineProps<{ type: string }>();
 const emit = defineEmits(['close', 'upload-finished']);
-
-const mediaStore = useMediaStore();
-const { fetchMedia } = mediaStore;
 
 const file = ref<File | null>(null);
 const result = ref<any | null>(null);
 const nudity = ref<{ sexy: number; porn: number }>({ sexy: 0, porn: 0 });
 
 const store = useUploadStore();
+const mediaStore = useMediaStore();
+const { fetchMedia } = mediaStore;
 const { progress, uploading, message } = storeToRefs(store);
 
 async function onFileChange(e: Event) {
@@ -98,8 +115,7 @@ async function onFileChange(e: Event) {
 
     if (res) {
       result.value = res;
-
-      emit('upload-finished', result.value?.media_type); // or use a more explicit prop if needed
+      emit('upload-finished', result.value?.media_type);
 
       try {
         const parsed = JSON.parse(res.nudity_score.replace(/'/g, '"'));
@@ -113,12 +129,6 @@ async function onFileChange(e: Event) {
     }
   }
 }
-
-
-function handleUploadFinished(type: string) {
-  fetchMedia(type);
-}
-
 </script>
 
 <style scoped>

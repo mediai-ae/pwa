@@ -55,6 +55,18 @@ export const useMediaStore = defineStore('media', () => {
         return ApiService.post('/subtitle/generate' + id, { id, target_language: language });
     };
 
+    const getSubtitleStatus = async (jobId: string) => {
+        try {
+            const response = await ApiService.query('/subtitle_status', {
+                params: { job_id: jobId }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching subtitle status:', error);
+            throw error;
+        }
+    };
+
     return {
         mediaItems,
         loading,
@@ -63,5 +75,6 @@ export const useMediaStore = defineStore('media', () => {
         analyzeContent,
         analyzeAd,
         generateSubtitle,
+        getSubtitleStatus,
     };
 });
