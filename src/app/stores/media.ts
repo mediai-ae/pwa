@@ -2,8 +2,28 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import ApiService from '@/app/services/ApiService';
 
+export interface NudityScore {
+    sexy: number;
+    porn: number;
+}
+export interface Media {
+    id: number;
+    media_type: string;
+    filename: string;
+    fingerprint: string;
+    hashtags: string[];
+    nudity_score: NudityScore;
+    path: string;
+    rga_category: string;
+    thumbnail: string;
+    url: string;
+    user_id: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export const useMediaStore = defineStore('media', () => {
-    const mediaItems = ref([]);
+    const mediaItems = ref<Media[]>([]);
     const loading = ref(false);
     const error = ref('');
 
@@ -23,15 +43,15 @@ export const useMediaStore = defineStore('media', () => {
         }
     };
 
-    const analyzeContent = async (id: string) => {
+    const analyzeContent = async (id: number) => {
         return ApiService.post('/analyze/video/' + id, { id });
     };
 
-    const analyzeAd = async (id: string) => {
+    const analyzeAd = async (id: number) => {
         return ApiService.post('/analyze/ad/' + id, { id });
     };
 
-    const generateSubtitle = async (id: string, language = 'en') => {
+    const generateSubtitle = async (id: number, language = 'en') => {
         return ApiService.post('/subtitle/generate' + id, { id, target_language: language });
     };
 

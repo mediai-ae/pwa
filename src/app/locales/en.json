@@ -11,7 +11,13 @@
     "chooseAnother": "Choose Another File",
     "close": "Close",
     "approve": "Approve",
-    "reject": "Reject"
+    "reject": "Reject",
+    "analyzeContent": "Analyze Content",
+    "analyzingContent": "Analyzing...",
+    "analyzeAd": "Analyze Ad",
+    "analyzingAd": "Analyzing Ad...",
+    "generateSubtitle": "Generate Subtitle",
+    "generatingSubtitle": "Generating..."
   },
   "login": {
     "title": "Welcome to Mediai",
