@@ -52,12 +52,12 @@ export const useMediaStore = defineStore('media', () => {
     };
 
     const generateSubtitle = async (id: number, language = 'en') => {
-        return ApiService.post('/subtitle/generate' + id, { id, target_language: language });
+        return ApiService.post('/subtitle/generate/' + id, { id, target_language: language });
     };
 
     const getSubtitleStatus = async (jobId: string) => {
         try {
-            const response = await ApiService.query('/subtitle_status', {
+            const response = await ApiService.query('/subtitle/status', {
                 params: { job_id: jobId }
             });
             return response.data;

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="p-md-6">
     <h2 class="text-xl font-bold mb-4">{{ t('header.title') }}</h2>
 
     <div v-if="loading" class="text-gray-500">Loading...</div>

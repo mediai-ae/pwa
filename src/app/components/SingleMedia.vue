@@ -116,7 +116,7 @@ async function handleModal(type: 'content' | 'ad', id: number) {
 }
 
 function openSubtitleLanguageSelector(mediaId: number) {
-  openModal?.('subtitle', { mediaId });
+  openModal?.('subtitle',  mediaId);
 }
 </script>
 
