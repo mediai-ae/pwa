@@ -1,21 +1,54 @@
 {
   "header": {
-    "title": "معرض المحتوى"
+    "title": "معرض المحتوى",
+    "dashboard": "لوحة التحكم",
+    "toggleTheme": "تبديل الوضع"
   },
   "buttons": {
-    "upload": "تحميل",
+    "chooseFile": "اختر ملفًا",
+    "upload": "رفع",
+    "uploading": "جارٍ الرفع...",
     "search": "بحث",
-    "recommend": "توصية"
+    "recommend": "توصية",
+    "chooseAnother": "اختر ملفًا آخر",
+    "close": "إغلاق",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "analyzeContent": "تحليل المحتوى",
+    "analyzingContent": "جارٍ تحليل المحتوى...",
+    "analyzeAd": "تحليل الإعلان",
+    "analyzingAd": "جارٍ تحليل الإعلان...",
+    "generateSubtitle": "إنشاء الترجمة",
+    "generatingSubtitle": "جارٍ إنشاء الترجمة..."
   },
   "login": {
-    "title": "مرحبًا بك في ميدياي",
+    "title": "مرحبًا بك في ميديـاي",
     "subtitle": "يرجى تسجيل الدخول للوصول إلى التطبيق.",
     "or": "أو",
     "usernamePlaceholder": "اسم المستخدم",
     "passwordPlaceholder": "كلمة المرور",
-    "loginButton": "تسجيل الدخول باسم المستخدم",
-    "googleButton": "تسجيل الدخول عبر جوجل",
-    "googleError": "فشل تسجيل الدخول عبر جوجل",
+    "loginButton": "تسجيل الدخول باستخدام اسم المستخدم",
+    "googleButton": "تسجيل الدخول باستخدام جوجل",
+    "googleError": "فشل تسجيل الدخول باستخدام جوجل",
     "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة"
+  },
+  "titles": {
+    "analysisResults": "نتائج التحليل"
+  },
+  "table": {
+    "frame": "الإطار",
+    "time": "الوقت (ثانية)",
+    "hashtags": "الوسوم",
+    "rga": "RGA",
+    "actions": "الإجراءات"
+  },
+  "messages": {
+    "noAnalysisData": "لا توجد بيانات تحليل.",
+    "noHashtags": "----"
+  },
+  "rga": {
+    "high": "عالي",
+    "medium": "متوسط",
+    "low": "منخفض"
   }
 }
