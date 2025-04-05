@@ -3,7 +3,6 @@
       v-if="activeModal === 'upload'"
       type="upload"
       @close="emit('close')"
-      @upload-finished="handleUploadFinished"
   />
   <AnalysisModal
       v-if="activeModal === 'content'"
@@ -37,8 +36,4 @@ defineProps<{
 }>();
 
 const emit = defineEmits(['close']);
-
-function handleUploadFinished() {
-  emit('close');
-}
 </script>

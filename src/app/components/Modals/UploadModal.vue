@@ -90,9 +90,12 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUploadStore } from '@/app/stores/upload';
 import { useMediaStore } from "@/app/stores/media";
+import {useRouter} from "vue-router";
 
 defineProps<{ type: string }>();
 const emit = defineEmits(['close', 'upload-finished']);
+
+const router = useRouter();
 
 const file = ref<File | null>(null);
 const result = ref<any | null>(null);
@@ -115,14 +118,17 @@ async function onFileChange(e: Event) {
 
     if (res) {
       result.value = res;
-      emit('upload-finished', result.value?.media_type);
-
       try {
         const parsed = JSON.parse(res.nudity_score.replace(/'/g, '"'));
         nudity.value = {
           sexy: Math.round(parsed.sexy * 100),
           porn: Math.round(parsed.porn * 100),
         };
+
+        await fetchMedia(res.media_type);
+        await router.push(res.media_type + "s")
+
+        emit('upload-finished', result.value?.media_type);
       } catch (err) {
         console.error('Failed to parse nudity_score:', res.nudity_score);
       }

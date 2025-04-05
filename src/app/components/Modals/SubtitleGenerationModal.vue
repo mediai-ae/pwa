@@ -127,16 +127,15 @@ const startSubtitleGeneration = async () => {
         const status = await store.getSubtitleStatus(jobId);
 
         if (status.pitch_image) {
-          pitchImage.value = '/' + status.pitch_image.replace(/\\\\/g, '/');
+          pitchImage.value = status.pitch_image;
         }
         if (status.clean_audio) {
-          cleanAudio.value = '/' + status.clean_audio.replace(/\\\\/g, '/');
+          cleanAudio.value = status.clean_audio;
         }
 
-        const result = status[`${jobId}_result`];
-        if (result) {
-          mergedLink.value = `/download_subtitle/${jobId}?type=merged`;
-          translatedLink.value = `/download_subtitle/${jobId}?type=translated`;
+        if (status['result']) {
+          mergedLink.value = status['result']['merged_srt'];
+          translatedLink.value = status['result']['translated_srt'];
         }
 
         if (status.progress >= 100) {
