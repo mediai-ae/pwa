@@ -1,4 +1,3 @@
-// /app/stores/upload.ts
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import ApiService from '@/app/services/ApiService';

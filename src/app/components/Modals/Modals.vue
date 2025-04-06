@@ -22,6 +22,11 @@
       :mediaId="modalData"
       @close="emit('close')"
   />
+  <RecommendModal
+      v-if="activeModal === 'recommend'"
+      type="recommend"
+      @close="emit('close')"
+  />
 </template>
 
 <script setup lang="ts">
@@ -29,6 +34,7 @@ import UploadModal from '@/app/components/Modals/UploadModal.vue';
 import AnalysisModal from '@/app/components/Modals/AnalysisModal.vue';
 import AdModal from "@/app/components/Modals/AdModal.vue";
 import SubtitleGenerationModal from "@/app/components/Modals/SubtitleGenerationModal.vue";
+import RecommendModal from "@/app/components/Modals/RecommendModal.vue";
 
 defineProps<{
   activeModal: string;

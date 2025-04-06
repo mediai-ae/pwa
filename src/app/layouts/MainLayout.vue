@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue';
+import { ref, provide, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
 import Modals from '@/app/components/Modals/Modals.vue';
@@ -35,11 +35,21 @@ import Modals from '@/app/components/Modals/Modals.vue';
 const { locale } = useI18n();
 const isDark = ref(true);
 
-// Modal state
+onMounted(() => {
+  const savedLocale = localStorage.getItem('app-locale');
+  if (savedLocale) {
+    locale.value = savedLocale;
+  }
+
+  const savedTheme = localStorage.getItem('app-theme');
+  isDark.value = savedTheme === 'dark';
+  document.documentElement.classList.toggle('dark', isDark.value);
+});
+
+// --- Modal state ---
 const activeModal = ref('');
 const modalData = ref<any>(null);
 
-// Provide openModal
 function openModal(type: string, data: any = null) {
   activeModal.value = type;
   modalData.value = data;
@@ -48,18 +58,17 @@ function closeModal() {
   activeModal.value = '';
   modalData.value = null;
 }
-
 provide('openModal', openModal);
 
-// Dark mode
 function toggleDark() {
   isDark.value = !isDark.value;
   document.documentElement.classList.toggle('dark', isDark.value);
+  localStorage.setItem('app-theme', isDark.value ? 'dark' : 'light');
 }
 
-// Language
 function changeLocale(lang: string) {
   locale.value = lang;
+  localStorage.setItem('app-locale', lang);
 }
 </script>
 

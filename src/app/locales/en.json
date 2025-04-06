@@ -36,7 +36,8 @@
   "titles": {
     "analysisResults": "Analysis Results",
     "sceneAnalysis": "Scene Analysis Results",
-    "generateSubtitle": "Generate Subtitle"
+    "generateSubtitle": "Generate Subtitle",
+    "recommendation": "Content Recommendation"
   },
   "table": {
     "frame": "Frame",
@@ -55,7 +56,11 @@
     "dominantColor": "Dominant Color",
     "complementaryColor": "Complementary Color",
     "score": "Score",
-    "isBest": "Best"
+    "isBest": "Best",
+    "filename": "Filename",
+    "cosineSimilarity": "Cosine Similarity",
+    "commonHashtags": "Common Hashtags",
+    "totalScore": "Total Score"
   },
   "labels": {
     "rgaCategory": "RGA Category",
@@ -69,12 +74,14 @@
     "cleanAudio": "Clean Audio (Noise Reduced)",
     "originalSubtitle": "Original Subtitle",
     "translatedSubtitle": "Translated Subtitle",
-    "download": "Download"
+    "download": "Download",
+    "selectMedia": "Select Media File"
   },
   "messages": {
     "noAnalysisData": "No analysis data available.",
     "noHashtags": "----",
-    "none": "None"
+    "none": "None",
+    "recommendationError": "Error during content recommendation"
   },
   "rga": {
     "high": "High",
