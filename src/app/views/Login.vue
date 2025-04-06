@@ -94,25 +94,33 @@ const { locale: i18nLocale, t } = useI18n();
 
 const locale = computed({
   get: () => i18nLocale.value,
-  set: (val) => (i18nLocale.value = val),
+  set: (val) => {
+    i18nLocale.value = val;
+    localStorage.setItem('app-locale', val);
+  },
 });
 
 const isDark = ref(true);
-const showPassword = ref(false);
-const username = ref('');
-const password = ref('');
-
-// Sync dark mode with <html>
-function toggleDark() {
-  isDark.value = !isDark.value;
-  document.documentElement.classList.toggle('dark', isDark.value);
-}
-
-// Init dark mode & user
 onMounted(() => {
+  const savedLocale = localStorage.getItem('app-locale');
+  if (savedLocale) locale.value = savedLocale;
+
+  const savedTheme = localStorage.getItem('app-theme');
+  isDark.value = savedTheme === 'dark';
+
   document.documentElement.classList.toggle('dark', isDark.value);
   auth.loadUserFromStorage();
 });
+
+function toggleDark() {
+  isDark.value = !isDark.value;
+  document.documentElement.classList.toggle('dark', isDark.value);
+  localStorage.setItem('app-theme', isDark.value ? 'dark' : 'light');
+}
+
+const showPassword = ref(false);
+const username = ref('');
+const password = ref('');
 
 // Login with username/pass
 function loginWithUsername() {

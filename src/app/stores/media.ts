@@ -67,6 +67,16 @@ export const useMediaStore = defineStore('media', () => {
         }
     };
 
+    const recommend = async (mediaId: number) => {
+        try {
+            const response = await ApiService.get('/analyze/recommend', mediaId.toString());
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching subtitle status:', error);
+            throw error;
+        }
+    };
+
     return {
         mediaItems,
         loading,
@@ -76,5 +86,6 @@ export const useMediaStore = defineStore('media', () => {
         analyzeAd,
         generateSubtitle,
         getSubtitleStatus,
+        recommend,
     };
 });

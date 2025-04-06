@@ -1,6 +1,9 @@
 <template>
   <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 animate-fadeIn px-2">
-    <div class="relative w-full max-w-2xl bg-white dark:bg-secondary-dark text-black dark:text-white rounded-2xl shadow-2xl max-h-[90vh] p-6 overflow-y-auto space-y-6">
+    <div
+        class="relative w-full max-w-2xl bg-white dark:bg-secondary-dark text-black dark:text-white
+             rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] p-4 sm:p-6 space-y-6"
+    >
 
       <!-- Close Button -->
       <button
@@ -9,7 +12,12 @@
           aria-label="Close"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10 3.636 5.05a1 1 0 011.414-1.414L10 8.586z" clip-rule="evenodd"/>
+          <path
+              fill-rule="evenodd"
+              d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10
+               3.636 5.05a1 1 0 011.414-1.414L10 8.586z"
+              clip-rule="evenodd"
+          />
         </svg>
       </button>
 
@@ -24,14 +32,16 @@
           <label for="inputFilename" class="block mb-1 font-medium">
             {{ $t('labels.selectMedia') }}
           </label>
-          <select v-model="selectedFile" id="inputFilename" class="w-full p-2 rounded-xl bg-gray-100 dark:bg-gray-800">
-            <option v-for="file in mediaItems" :key="file.id" :value="file.filename">
+          <select
+              v-model="selectedFile"
+              id="inputFilename"
+              class="w-full p-2 rounded-xl bg-gray-100 dark:bg-gray-800"
+          >
+            <option v-for="file in mediaItems" :key="file.id" :value="file.id">
               {{ file.filename }}
             </option>
           </select>
         </div>
-
-        <input type="hidden" v-model="mediaType" />
 
         <button
             type="submit"
@@ -57,6 +67,7 @@
         <table class="min-w-full text-center border border-gray-300 dark:border-gray-600 text-sm">
           <thead class="bg-gray-100 dark:bg-gray-700 text-xs uppercase">
           <tr>
+            <th class="p-2">{{ $t('table.thumbnail') }}</th>
             <th class="p-2">{{ $t('table.filename') }}</th>
             <th class="p-2">{{ $t('table.cosineSimilarity') }}</th>
             <th class="p-2">{{ $t('table.commonHashtags') }}</th>
@@ -69,6 +80,14 @@
               :key="idx"
               class="border-t border-gray-200 dark:border-gray-700"
           >
+            <!-- Thumbnail column -->
+            <td class="p-2">
+              <img
+                  :src="rec.thumbnail"
+                  alt="Thumbnail"
+                  class="inline-block w-16 h-16 object-cover rounded"
+              />
+            </td>
             <td class="p-2">{{ rec.filename }}</td>
             <td class="p-2">{{ rec.cosine_similarity }}%</td>
             <td class="p-2">{{ rec.common_hashtags.join(', ') }}</td>
@@ -87,34 +106,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useMediaStore } from '@/app/stores/media';
 import { useI18n } from 'vue-i18n';
 
-const emit = defineEmits(['close']);
+defineEmits(['close']);
 
 const store = useMediaStore();
 const { t } = useI18n();
 
-const selectedFile = ref('');
-const mediaType = ref('image');
+const selectedFile = ref(0);
 const progress = ref(0);
 const loading = ref(false);
 const error = ref('');
 const results = ref<Array<any>>([]);
 
-const mediaItems = ref(store.mediaItems);
+const mediaItems = computed(() => store.mediaItems);
 
 onMounted(async () => {
-  if (!mediaItems.value.length) {
-    await store.fetchMedia(mediaType.value);
-    mediaItems.value = store.mediaItems;
-  }
-
-  if (mediaItems.value.length > 0) {
-    selectedFile.value = mediaItems.value[0].filename;
-  }
+  await store.fetchMedia('image');
 });
+
+watch(
+    mediaItems,
+    (items) => {
+      if (items.length > 0) {
+        selectedFile.value = items[0].id;
+      }
+    },
+    { immediate: true }
+);
 
 const submitRecommendation = async () => {
   progress.value = 0;
@@ -122,19 +143,10 @@ const submitRecommendation = async () => {
   results.value = [];
   loading.value = true;
 
-  const formData = new FormData();
-  formData.append('inputFilename', selectedFile.value);
-  formData.append('media_type', mediaType.value);
-
   try {
     progress.value = 50;
 
-    const res = await fetch('/recommend', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const data = await res.json();
+    const data = await store.recommend(selectedFile.value);
 
     progress.value = 100;
 

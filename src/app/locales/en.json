@@ -60,7 +60,8 @@
     "filename": "Filename",
     "cosineSimilarity": "Cosine Similarity",
     "commonHashtags": "Common Hashtags",
-    "totalScore": "Total Score"
+    "totalScore": "Total Score",
+    "thumbnail": "Thumbnail"
   },
   "labels": {
     "rgaCategory": "RGA Category",
