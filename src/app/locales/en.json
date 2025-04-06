@@ -88,5 +88,34 @@
     "high": "High",
     "medium": "Medium",
     "low": "Low"
+  },
+
+
+
+  "search": {
+    "title": "Search",
+    "labels": {
+      "searchQuery": "Search Query",
+      "dragDropText": "Drag and drop an image here\nor click to select"
+    },
+    "buttons": {
+      "textSearch": "Search",
+      "imageSearch": "Search by Image"
+    },
+    "table": {
+      "name": "Name",
+      "thumbnail": "Thumbnail",
+      "hashtags": "Hashtags",
+      "rga": "RGA",
+      "fingerprint": "Fingerprint",
+      "actions": "Actions",
+      "similarity": "Similarity"
+    },
+    "errors": {
+      "noImageSelected": "No image selected.",
+      "noResultsFound": "No results found",
+      "searchError": "Error searching text",
+      "imageSearchError": "Error searching by image"
+    }
   }
 }

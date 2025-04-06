@@ -27,6 +27,11 @@
       type="recommend"
       @close="emit('close')"
   />
+  <SearchModal
+      v-if="activeModal === 'search'"
+      type="search"
+      @close="emit('close')"
+  />
 </template>
 
 <script setup lang="ts">
@@ -35,6 +40,7 @@ import AnalysisModal from '@/app/components/Modals/AnalysisModal.vue';
 import AdModal from "@/app/components/Modals/AdModal.vue";
 import SubtitleGenerationModal from "@/app/components/Modals/SubtitleGenerationModal.vue";
 import RecommendModal from "@/app/components/Modals/RecommendModal.vue";
+import SearchModal from "@/app/components/Modals/SearchModal.vue";
 
 defineProps<{
   activeModal: string;

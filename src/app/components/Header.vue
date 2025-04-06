@@ -65,7 +65,7 @@
           <button @click="() => openModal?.('upload')" class="toolbar-btn">
             ⬆️ {{ t('buttons.upload') }}
           </button>
-          <button class="toolbar-btn">
+          <button @click="() => openModal?.('search')" class="toolbar-btn">
             🔍 {{ t('buttons.search') }}
           </button>
           <button @click="() => openModal?.('recommend')" class="toolbar-btn">
