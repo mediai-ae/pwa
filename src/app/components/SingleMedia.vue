@@ -7,6 +7,8 @@
           class="w-full h-40 object-cover rounded mb-2"
       />
       <h3 class="font-semibold">{{ media.filename }}</h3>
+      <p class="text-sm text-gray-600" v-if="media.nudity.sexy">{{ $t('labels.sexy') }}: {{ media.nudity.sexy }}%</p>
+      <p class="text-sm text-gray-600" v-if="media.nudity.porn">{{ $t('labels.porn') }}: {{ media.nudity.porn }}%%</p>
       <p class="text-sm text-gray-600">Type: {{ media.media_type }}</p>
       <p class="text-sm text-gray-600">RGA: {{ media.rga_category }}</p>
       <p class="text-sm text-gray-600">

@@ -12,7 +12,7 @@ export interface Media {
     filename: string;
     fingerprint: string;
     hashtags: string[];
-    nudity_score: NudityScore;
+    nudity: NudityScore;
     path: string;
     rga_category: string;
     thumbnail: string;

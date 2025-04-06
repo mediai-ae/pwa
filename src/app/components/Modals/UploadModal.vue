@@ -56,8 +56,8 @@
           </p>
           <p>
             <span class="font-semibold">🔞 {{ $t('labels.nudityScore') }}:</span>
-            {{ $t('labels.sexy') }}: {{ nudity.sexy }}% |
-            {{ $t('labels.porn') }}: {{ nudity.porn }}%
+            {{ $t('labels.sexy') }}: {{ result.nudity.sexy }}%
+            {{ $t('labels.porn') }}: {{ result.nudity.porn }}%
           </p>
           <p>
             <span class="font-semibold">🏷️ {{ $t('labels.hashtags') }}:</span>
@@ -99,7 +99,6 @@ const router = useRouter();
 
 const file = ref<File | null>(null);
 const result = ref<any | null>(null);
-const nudity = ref<{ sexy: number; porn: number }>({ sexy: 0, porn: 0 });
 
 const store = useUploadStore();
 const mediaStore = useMediaStore();
@@ -111,27 +110,16 @@ async function onFileChange(e: Event) {
   if (target.files?.length) {
     file.value = target.files[0];
     result.value = null;
-    nudity.value = { sexy: 0, porn: 0 };
 
     store.reset();
     const res = await store.uploadFile(file.value);
 
     if (res) {
       result.value = res;
-      try {
-        const parsed = JSON.parse(res.nudity_score.replace(/'/g, '"'));
-        nudity.value = {
-          sexy: Math.round(parsed.sexy * 100),
-          porn: Math.round(parsed.porn * 100),
-        };
-
         await fetchMedia(res.media_type);
         await router.push(res.media_type + "s")
 
         emit('upload-finished', result.value?.media_type);
-      } catch (err) {
-        console.error('Failed to parse nudity_score:', res.nudity_score);
-      }
     }
   }
 }

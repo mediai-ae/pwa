@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import ApiService from '@/app/services/ApiService';
+import {type Media} from "@/app/stores/media";
 
 export const useUploadStore = defineStore('upload', () => {
     const progress = ref(0);
@@ -27,7 +28,7 @@ export const useUploadStore = defineStore('upload', () => {
             });
 
             message.value = 'Upload successful!';
-            return response.data['media'];
+            return response.data['media'] as Media;
         } catch (error) {
             console.error('Upload error:', error);
             message.value = 'Upload failed!';
