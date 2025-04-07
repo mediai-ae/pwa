@@ -46,29 +46,29 @@
               </div>
             </td>
             <td class="p-2">
-                <span
-                    :class="[
+              <span
+                  :class="[
                     'text-white font-semibold px-2 py-1 rounded-full text-xs',
                     {
-                      'bg-red-600': scene.rga === 'High',
-                      'bg-yellow-500': scene.rga === 'Medium',
-                      'bg-green-600': scene.rga === 'Low'
+                      'bg-red-600': scene.rga === 'R',
+                      'bg-yellow-500': scene.rga === 'A',
+                      'bg-green-600': scene.rga === 'G'
                     }
                   ]"
-                >
-                  {{ $t(`rga.${scene.rga.toLowerCase()}`) }}
-                </span>
+              >
+                {{ scene.rga }}
+              </span>
             </td>
             <td class="p-2">
               <div class="flex justify-center flex-wrap gap-1">
                 <button
-                    @click="$emit('approve', index)"
+                    @click="approveScene(index)"
                     class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-xl text-xs"
                 >
                   {{ $t('buttons.approve') }}
                 </button>
                 <button
-                    @click="$emit('reject', index)"
+                    @click="rejectScene(index)"
                     class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-xl text-xs"
                 >
                   {{ $t('buttons.reject') }}
@@ -100,11 +100,30 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import {onMounted} from "vue";
+import {useMediaStore} from "@/app/stores/media";
+
+const props = defineProps<{
   analysis: Array<any>
 }>();
 
-defineEmits(['close', 'approve', 'reject']);
+const store = useMediaStore();
+
+onMounted(async () => {
+  await store.fetchMedia('video');
+});
+
+const emit = defineEmits(['close', 'approve', 'reject']);
+
+function approveScene(index: number) {
+  props.analysis[index].rga = 'G';
+  emit('approve', index);
+}
+
+function rejectScene(index: number) {
+  props.analysis[index].rga = 'R';
+  emit('reject', index);
+}
 </script>
 
 <style scoped>
