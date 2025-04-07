@@ -2,24 +2,29 @@
   "header": {
     "title": "معرض المحتوى",
     "dashboard": "لوحة التحكم",
-    "toggleTheme": "تبديل السمة"
+    "toggleTheme": "تبديل المظهر"
   },
   "buttons": {
     "chooseFile": "اختر ملفًا",
     "upload": "رفع",
     "uploading": "جارٍ الرفع...",
     "search": "بحث",
-    "recommend": "اقتراح",
+    "recommend": "توصية",
     "chooseAnother": "اختر ملفًا آخر",
     "close": "إغلاق",
-    "approve": "موافقة",
+    "approve": "قبول",
     "reject": "رفض",
     "analyzeContent": "تحليل المحتوى",
     "analyzingContent": "جارٍ التحليل...",
     "analyzeAd": "تحليل الإعلان",
     "analyzingAd": "جارٍ تحليل الإعلان...",
-    "generateSubtitle": "توليد الترجمة",
-    "generatingSubtitle": "جارٍ التوليد..."
+    "generateSubtitle": "إنشاء الترجمة",
+    "generatingSubtitle": "جارٍ الإنشاء...",
+    "downloadFinalSubtitle": "تحميل الترجمة النهائية",
+    "showFull": "عرض كامل",
+    "hideFull": "إخفاء",
+    "delete": "حذف",
+    "deleting": "جارٍ الحذف..."
   },
   "login": {
     "title": "مرحبًا بك في Mediai",
@@ -28,39 +33,97 @@
     "usernamePlaceholder": "اسم المستخدم",
     "passwordPlaceholder": "كلمة المرور",
     "loginButton": "تسجيل الدخول باسم المستخدم",
-    "googleButton": "تسجيل الدخول باستخدام Google",
-    "googleError": "فشل تسجيل الدخول باستخدام Google",
+    "googleButton": "تسجيل الدخول باستخدام جوجل",
+    "googleError": "فشل تسجيل الدخول عبر جوجل",
     "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة"
   },
   "titles": {
-    "analysisResults": "نتائج التحليل"
+    "analysisResults": "نتائج التحليل",
+    "sceneAnalysis": "تحليل المشاهد",
+    "generateSubtitle": "إنشاء الترجمة",
+    "recommendation": "توصيات المحتوى"
   },
   "table": {
     "frame": "الإطار",
-    "time": "الوقت (ثواني)",
+    "time": "الوقت (ث)",
     "hashtags": "الوسوم",
     "rga": "RGA",
     "actions": "الإجراءات",
-    "sceneId": "معرّف المشهد",
+    "sceneId": "معرف المشهد",
     "keyFrame": "الإطار الرئيسي",
-    "saliencyMap": "خريطة التركيز",
-    "emptySpace": "المساحة الفارغة",
+    "saliencyMap": "خريطة البروز",
+    "emptySpace": "مساحة فارغة",
     "emotion": "العاطفة الوجهية",
     "billboards": "اللوحات الإعلانية",
-    "saliencyScore": "درجة التركيز",
+    "saliencyScore": "درجة البروز",
     "motionScore": "الحركة",
     "dominantColor": "اللون السائد",
     "complementaryColor": "اللون المكمل",
     "score": "الدرجة",
-    "isBest": "الأفضل"
+    "isBest": "الأفضل",
+    "filename": "اسم الملف",
+    "cosineSimilarity": "تشابه جيبي",
+    "commonHashtags": "الوسوم المشتركة",
+    "totalScore": "إجمالي الدرجة",
+    "thumbnail": "الصورة المصغرة"
+  },
+  "labels": {
+    "rgaCategory": "فئة RGA",
+    "nudityScore": "درجة العري",
+    "sexy": "مثير",
+    "porn": "إباحي",
+    "hashtags": "الوسوم",
+    "yes": "نعم",
+    "selectLanguage": "اختر اللغة المستهدفة",
+    "pitchContour": "منحنى النغمة",
+    "cleanAudio": "الصوت النقي (بعد إزالة الضوضاء)",
+    "originalSubtitle": "الترجمة الأصلية",
+    "translatedSubtitle": "الترجمة المترجمة",
+    "download": "تحميل",
+    "selectMedia": "اختر ملف وسائط"
   },
   "messages": {
     "noAnalysisData": "لا توجد بيانات تحليل متاحة.",
-    "noHashtags": "----"
+    "noHashtags": "----",
+    "none": "لا يوجد",
+    "recommendationError": "حدث خطأ أثناء التوصية بالمحتوى",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا الملف؟"
+  },
+  "navigation": {
+    "texts": "نصوص",
+    "images": "صور",
+    "audios": "صوتيات",
+    "videos": "فيديوهات"
   },
   "rga": {
-    "high": "مرتفع",
+    "high": "عالٍ",
     "medium": "متوسط",
     "low": "منخفض"
+  },
+  "search": {
+    "title": "بحث",
+    "labels": {
+      "searchQuery": "عبارة البحث",
+      "dragDropText": "اسحب وأسقط صورة هنا\nأو انقر لاختيار واحدة"
+    },
+    "buttons": {
+      "textSearch": "بحث نصي",
+      "imageSearch": "بحث بالصورة"
+    },
+    "table": {
+      "name": "الاسم",
+      "thumbnail": "الصورة المصغرة",
+      "hashtags": "الوسوم",
+      "rga": "RGA",
+      "fingerprint": "البصمة",
+      "actions": "الإجراءات",
+      "similarity": "التشابه"
+    },
+    "errors": {
+      "noImageSelected": "لم يتم اختيار صورة.",
+      "noResultsFound": "لم يتم العثور على نتائج",
+      "searchError": "حدث خطأ أثناء البحث النصي",
+      "imageSearchError": "حدث خطأ أثناء البحث بالصورة"
+    }
   }
 }

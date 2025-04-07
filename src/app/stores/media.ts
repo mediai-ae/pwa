@@ -43,6 +43,16 @@ export const useMediaStore = defineStore('media', () => {
         }
     };
 
+    const deleteMedia = async (id: number) => {
+        try {
+            await ApiService.delete(`/media/${id}`);
+            mediaItems.value = mediaItems.value.filter(item => item.id !== id);
+        } catch (error) {
+            console.error('Error deleting media:', error);
+            throw error;
+        }
+    };
+
     const analyzeContent = async (id: number) => {
         return ApiService.post('/analyze/video/' + id, { id });
     };
@@ -82,6 +92,7 @@ export const useMediaStore = defineStore('media', () => {
         loading,
         error,
         fetchMedia,
+        deleteMedia,
         analyzeContent,
         analyzeAd,
         generateSubtitle,

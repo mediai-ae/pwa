@@ -10,10 +10,18 @@
 
       <!-- Tabs -->
       <div class="tabs flex text-center shadow transition text-black bg-gray-100 dark:text-white dark:bg-secondary-dark">
-        <router-link class="tab flex-1 py-3" :to="{ name: 'texts' }" active-class="active">Texts</router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'images' }" active-class="active">Images</router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'audios' }" active-class="active">Audios</router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'videos' }" active-class="active">Videos</router-link>
+        <router-link class="tab flex-1 py-3" :to="{ name: 'texts' }" active-class="active">
+          {{ t('navigation.texts') }}
+        </router-link>
+        <router-link class="tab flex-1 py-3" :to="{ name: 'images' }" active-class="active">
+          {{ t('navigation.images') }}
+        </router-link>
+        <router-link class="tab flex-1 py-3" :to="{ name: 'audios' }" active-class="active">
+          {{ t('navigation.audios') }}
+        </router-link>
+        <router-link class="tab flex-1 py-3" :to="{ name: 'videos' }" active-class="active">
+          {{ t('navigation.videos') }}
+        </router-link>
       </div>
 
       <main class="p-4 transition-all duration-300">
@@ -32,7 +40,7 @@ import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
 import Modals from '@/app/components/Modals/Modals.vue';
 
-const { locale } = useI18n();
+const { locale, t } = useI18n(); // 👈 add t
 const isDark = ref(true);
 
 onMounted(() => {
@@ -46,7 +54,7 @@ onMounted(() => {
   document.documentElement.classList.toggle('dark', isDark.value);
 });
 
-// --- Modal state ---
+// Modal state
 const activeModal = ref('');
 const modalData = ref<any>(null);
 
