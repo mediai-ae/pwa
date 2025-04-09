@@ -34,6 +34,11 @@ const router = createRouter({
           name: 'videos',
           component: () => import('@/app/views/Media.vue'),
         },
+        {
+          path: '/app/tokens',
+          name: 'tokens',
+          component: () => import('@/app/views/Tokens.vue'),
+        },
       ],
     },
     {
