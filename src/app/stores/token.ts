@@ -5,12 +5,13 @@ import ApiService from '@/app/services/ApiService';
 export interface AccessToken {
   id: number;
   name: string;
+  access_token: string;
   created_at: string;
 }
 
 export const useTokenStore = defineStore('token', () => {
   const tokens = ref<AccessToken[]>([]);
-  const createdToken = ref<string>('');
+  const createdToken = ref(''); // changed to string (still simple, matches usage)
   const loading = ref(false);
   const error = ref('');
 
@@ -18,7 +19,7 @@ export const useTokenStore = defineStore('token', () => {
     loading.value = true;
     error.value = '';
     try {
-      const { data } = await ApiService.query('/tokens',{});
+      const { data } = await ApiService.query('/tokens', {});
       tokens.value = data.tokens;
     } catch (err) {
       console.error('Error fetching tokens:', err);
@@ -32,7 +33,7 @@ export const useTokenStore = defineStore('token', () => {
     error.value = '';
     try {
       const { data } = await ApiService.post('/tokens', { name });
-      createdToken.value = data.token;
+      createdToken.value = data.access_token;
       await fetchTokens();
     } catch (err) {
       console.error('Error creating token:', err);

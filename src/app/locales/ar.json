@@ -2,12 +2,12 @@
   "header": {
     "title": "معرض المحتوى",
     "dashboard": "لوحة التحكم",
-    "toggleTheme": "تبديل الوضع"
+    "toggleTheme": "تبديل المظهر"
   },
   "buttons": {
     "chooseFile": "اختر ملفًا",
     "upload": "رفع",
-    "uploading": "جاري الرفع...",
+    "uploading": "جارٍ الرفع...",
     "search": "بحث",
     "recommend": "توصية",
     "chooseAnother": "اختر ملفًا آخر",
@@ -15,36 +15,37 @@
     "approve": "موافقة",
     "reject": "رفض",
     "analyzeContent": "تحليل المحتوى",
-    "analyzingContent": "جاري التحليل...",
+    "analyzingContent": "جارٍ التحليل...",
     "analyzeAd": "تحليل الإعلان",
-    "analyzingAd": "جاري تحليل الإعلان...",
-    "generateSubtitle": "إنشاء الترجمة",
-    "generatingSubtitle": "جاري الإنشاء...",
+    "analyzingAd": "جارٍ تحليل الإعلان...",
+    "generateSubtitle": "توليد الترجمة",
+    "generatingSubtitle": "جارٍ التوليد...",
     "downloadFinalSubtitle": "تحميل الترجمة النهائية",
-    "showFull": "عرض كامل",
-    "hideFull": "إخفاء",
+    "showFull": "عرض الكل",
+    "hideFull": "إخفاء الكل",
     "delete": "حذف",
-    "deleting": "جاري الحذف...",
+    "deleting": "جارٍ الحذف...",
     "profile": "الملف الشخصي",
-    "darkMode": "الوضع الليلي",
+    "darkMode": "الوضع الداكن",
     "language": "اللغة",
-    "signOut": "تسجيل الخروج"
+    "signOut": "تسجيل الخروج",
+    "copy": "نسخ"
   },
   "login": {
-    "title": "مرحبًا بك في ميدياي",
+    "title": "مرحبًا بك في Mediai",
     "subtitle": "يرجى تسجيل الدخول للوصول إلى التطبيق.",
     "or": "أو",
     "usernamePlaceholder": "اسم المستخدم",
     "passwordPlaceholder": "كلمة المرور",
-    "loginButton": "تسجيل الدخول باستخدام اسم المستخدم",
-    "googleButton": "تسجيل الدخول باستخدام جوجل",
-    "googleError": "فشل تسجيل الدخول بجوجل",
+    "loginButton": "تسجيل الدخول باسم المستخدم",
+    "googleButton": "تسجيل الدخول عبر Google",
+    "googleError": "فشل تسجيل الدخول عبر Google",
     "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة"
   },
   "titles": {
     "analysisResults": "نتائج التحليل",
     "sceneAnalysis": "نتائج تحليل المشهد",
-    "generateSubtitle": "إنشاء الترجمة",
+    "generateSubtitle": "توليد الترجمة",
     "recommendation": "توصية المحتوى"
   },
   "table": {
@@ -53,50 +54,50 @@
     "hashtags": "الوسوم",
     "rga": "RGA",
     "actions": "الإجراءات",
-    "sceneId": "معرّف المشهد",
+    "sceneId": "معرف المشهد",
     "keyFrame": "الإطار الرئيسي",
-    "saliencyMap": "خريطة البروز",
-    "emptySpace": "المساحة الفارغة",
-    "emotion": "العاطفة الوجهية",
-    "billboards": "اللافتات",
-    "saliencyScore": "درجة البروز",
-    "motionScore": "الحركة",
+    "saliencyMap": "خريطة الجذب البصري",
+    "emptySpace": "مساحة فارغة",
+    "emotion": "تعبير الوجه",
+    "billboards": "اللوحات الإعلانية",
+    "saliencyScore": "درجة الجذب",
+    "motionScore": "درجة الحركة",
     "dominantColor": "اللون السائد",
     "complementaryColor": "اللون المكمل",
     "score": "الدرجة",
     "isBest": "الأفضل",
     "filename": "اسم الملف",
-    "cosineSimilarity": "تشابه جيبي التمام",
+    "cosineSimilarity": "تشابه جيب التمام",
     "commonHashtags": "الوسوم المشتركة",
-    "totalScore": "الدرجة الكلية",
+    "totalScore": "المجموع الكلي",
     "thumbnail": "الصورة المصغرة"
   },
   "labels": {
     "rgaCategory": "فئة RGA",
     "nudityScore": "درجة العري",
-    "sexy": "مثير",
+    "sexy": "مثيـر",
     "porn": "إباحي",
     "hashtags": "الوسوم",
     "yes": "نعم",
     "selectLanguage": "اختر اللغة المستهدفة",
     "pitchContour": "منحنى النغمة",
-    "cleanAudio": "الصوت النقي (بعد إزالة الضوضاء)",
+    "cleanAudio": "صوت نقي (بإزالة الضوضاء)",
     "originalSubtitle": "الترجمة الأصلية",
     "translatedSubtitle": "الترجمة المترجمة",
     "download": "تحميل",
-    "selectMedia": "اختر ملف الوسائط"
+    "selectMedia": "اختر ملف وسائط"
   },
   "messages": {
     "noAnalysisData": "لا توجد بيانات تحليل متاحة.",
     "noHashtags": "----",
     "none": "لا يوجد",
     "recommendationError": "حدث خطأ أثناء توصية المحتوى",
-    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا الملف؟"
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الوسائط؟"
   },
   "navigation": {
     "texts": "نصوص",
     "images": "صور",
-    "audios": "ملفات صوتية",
+    "audios": "صوتيات",
     "videos": "فيديوهات"
   },
   "rga": {
@@ -105,26 +106,26 @@
     "low": "منخفض"
   },
   "search": {
-    "title": "البحث",
+    "title": "بحث",
     "labels": {
-      "searchQuery": "كلمة البحث",
-      "dragDropText": "اسحب وأفلت صورة هنا\nأو انقر للاختيار"
+      "searchQuery": "استعلام البحث",
+      "dragDropText": "اسحب وأسقط صورة هنا\nأو انقر لتحديد صورة"
     },
     "buttons": {
-      "textSearch": "بحث نصي",
+      "textSearch": "بحث",
       "imageSearch": "بحث بالصورة"
     },
     "table": {
       "name": "الاسم",
-      "thumbnail": "صورة مصغرة",
+      "thumbnail": "الصورة المصغرة",
       "hashtags": "الوسوم",
       "rga": "RGA",
-      "fingerprint": "البصمة",
+      "fingerprint": "بصمة المحتوى",
       "actions": "الإجراءات",
       "similarity": "التشابه"
     },
     "errors": {
-      "noImageSelected": "لم يتم اختيار صورة.",
+      "noImageSelected": "لم يتم تحديد صورة.",
       "noResultsFound": "لم يتم العثور على نتائج",
       "searchError": "حدث خطأ أثناء البحث النصي",
       "imageSearchError": "حدث خطأ أثناء البحث بالصورة"
@@ -134,8 +135,10 @@
     "title": "رموز الوصول الشخصية",
     "create": "إنشاء رمز",
     "generated": "تم إنشاء الرمز بنجاح",
+    "copyInstruction": "يجب عليك نسخ هذا الرمز الآن، لن تتمكن من رؤيته مرة أخرى!",
     "list": "الرموز الخاصة بك",
     "none": "لا توجد رموز حتى الآن",
-    "delete": "حذف"
+    "delete": "حذف",
+    "placeholder": "أدخل اسمًا للرمز"
   }
 }

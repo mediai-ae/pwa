@@ -63,3 +63,7 @@
 .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
 }
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}

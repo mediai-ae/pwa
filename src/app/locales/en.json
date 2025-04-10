@@ -28,7 +28,8 @@
     "profile": "Profile",
     "darkMode": "Dark Mode",
     "language": "Language",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "copy": "Copy"
   },
   "login": {
     "title": "Welcome to Mediai",
@@ -134,8 +135,10 @@
     "title": "Personal Access Tokens",
     "create": "Create Token",
     "generated": "Token created successfully",
+    "copyInstruction": "You must copy this token now. You won't be able to see it again!",
     "list": "Your Tokens",
     "none": "No tokens yet",
-    "delete": "Delete"
-    }
+    "delete": "Delete",
+    "placeholder": "Enter a name for your token"
+  }
 }
