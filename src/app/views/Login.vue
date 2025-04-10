@@ -1,7 +1,7 @@
 <template>
   <div
-      :dir="locale === 'ar' ? 'rtl' : 'ltr'"
-      class="min-h-screen bg-gray-50 dark:bg-primary-dark text-black dark:text-white transition"
+    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+    class="min-h-screen bg-gray-50 dark:bg-primary-dark text-black dark:text-white transition"
   >
     <!-- Header Controls -->
     <div class="absolute top-4 right-4 flex items-center gap-3 z-10">
@@ -16,7 +16,9 @@
 
     <!-- Centered Card -->
     <div class="flex items-center justify-center px-4 py-6 sm:py-12 min-h-screen">
-      <div class="w-full sm:max-w-md bg-white dark:bg-secondary-dark shadow-xl rounded-xl p-6 sm:p-8 space-y-6">
+      <div
+        class="w-full sm:max-w-md bg-white dark:bg-secondary-dark shadow-xl rounded-xl p-6 sm:p-8 space-y-6"
+      >
         <img src="/logo.svg" alt="Logo" class="w-20 h-20 mx-auto" />
 
         <h1 class="text-2xl font-bold text-center">{{ t('login.title') }}</h1>
@@ -26,10 +28,13 @@
 
         <!-- Google Button -->
         <button
-            disabled
-            class="w-full px-4 py-2 rounded bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed flex items-center justify-center gap-2 dark:bg-gray-700"
+          disabled
+          class="w-full px-4 py-2 rounded bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed flex items-center justify-center gap-2 dark:bg-gray-700"
         >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 opacity-50" />
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            class="w-5 h-5 opacity-50"
+          />
           <span class="font-medium">{{ t('login.googleButton') }} (Disabled)</span>
         </button>
 
@@ -40,27 +45,27 @@
         <!-- Login Form -->
         <form @submit.prevent="loginWithUsername" class="space-y-4">
           <input
-              type="text"
-              v-model="username"
-              :placeholder="t('login.usernamePlaceholder')"
-              class="w-full px-4 py-2 rounded bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent"
-              required
+            type="text"
+            v-model="username"
+            :placeholder="t('login.usernamePlaceholder')"
+            class="w-full px-4 py-2 rounded bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent"
+            required
           />
 
           <!-- Password Input with Toggle -->
           <div class="relative">
             <input
-                :type="showPassword ? 'text' : 'password'"
-                v-model="password"
-                :placeholder="t('login.passwordPlaceholder')"
-                class="w-full px-4 py-2 pr-10 rounded bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent"
-                required
+              :type="showPassword ? 'text' : 'password'"
+              v-model="password"
+              :placeholder="t('login.passwordPlaceholder')"
+              class="w-full px-4 py-2 pr-10 rounded bg-white dark:bg-gray-700 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent"
+              required
             />
             <button
-                type="button"
-                @click="showPassword = !showPassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300 focus:outline-none"
-                tabindex="-1"
+              type="button"
+              @click="showPassword = !showPassword"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300 focus:outline-none"
+              tabindex="-1"
             >
               <span v-if="showPassword">🙈</span>
               <span v-else>👁️</span>
@@ -68,8 +73,8 @@
           </div>
 
           <button
-              type="submit"
-              class="w-full px-4 py-2 rounded bg-accent-soft text-white hover:bg-accent transition"
+            type="submit"
+            class="w-full px-4 py-2 rounded bg-accent-soft text-white hover:bg-accent transition"
           >
             {{ t('login.loginButton') }}
           </button>

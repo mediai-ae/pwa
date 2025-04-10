@@ -6,18 +6,12 @@
     <div v-if="error" class="text-red-600">{{ error }}</div>
 
     <div v-if="mediaItems.length" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div
-          v-for="media in mediaItems"
-          :key="media.id"
-      >
+      <div v-for="media in mediaItems" :key="media.id">
         <SingleMedia :media="media" />
       </div>
     </div>
 
-    <div
-        v-if="!loading && !mediaItems.length"
-        class="text-center text-gray-500 mt-10"
-    >
+    <div v-if="!loading && !mediaItems.length" class="text-center text-gray-500 mt-10">
       No media found.
     </div>
   </div>
@@ -41,15 +35,24 @@ const route = useRoute();
 
 const mediaType = computed(() => {
   switch (route.name) {
-    case 'images': return 'image';
-    case 'texts': return 'text';
-    case 'audios': return 'audio';
-    case 'videos': return 'video';
-    default: return '';
+    case 'images':
+      return 'image';
+    case 'texts':
+      return 'text';
+    case 'audios':
+      return 'audio';
+    case 'videos':
+      return 'video';
+    default:
+      return '';
   }
 });
 
-watch(mediaType, (type) => {
-  fetchMedia(type);
-}, { immediate: true });
+watch(
+  mediaType,
+  (type) => {
+    fetchMedia(type);
+  },
+  { immediate: true },
+);
 </script>

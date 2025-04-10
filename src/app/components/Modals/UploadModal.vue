@@ -1,86 +1,79 @@
 <template>
-  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 animate-fadeIn px-2">
-    <div class="relative w-full max-w-lg bg-white dark:bg-secondary-dark text-black dark:text-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] p-4 sm:p-6 space-y-6">
+  <div class="space-y-6">
+    <!-- Modal Title -->
+    <h3 class="text-2xl font-bold text-center text-gray-800 dark:text-white">
+      {{ $t('buttons.upload') }}
+    </h3>
 
-      <!-- Close Button -->
-      <button
-          @click="$emit('close')"
-          class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-white transition"
-          aria-label="Close"
+    <!-- File Upload Area -->
+    <div
+      class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl p-6 text-center transition hover:border-blue-500"
+    >
+      <label for="fileInput" class="cursor-pointer flex flex-col items-center space-y-3">
+        <ArrowUpTrayIcon class="h-10 w-10 text-blue-600" />
+        <span class="text-blue-700 dark:text-blue-300 font-medium">
+          {{ file ? $t('buttons.chooseAnother') : $t('buttons.chooseFile') }}
+        </span>
+        <input id="fileInput" type="file" class="hidden" @change="onFileChange" />
+      </label>
+      <div
+        v-if="file?.name"
+        class="mt-4 text-sm text-gray-700 dark:text-gray-300 truncate flex items-center justify-center gap-2"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10 3.636 5.05a1 1 0 011.414-1.414L10 8.586z" clip-rule="evenodd"/>
-        </svg>
+        <DocumentIcon class="h-5 w-5 text-gray-500" />
+        <span class="font-medium">{{ file.name }}</span>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div
+      v-if="uploading"
+      class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden"
+    >
+      <div
+        class="h-full rounded-full bg-[linear-gradient(135deg,_rgba(59,130,246,1)_25%,_rgba(96,165,250,1)_25%,_rgba(96,165,250,1)_50%,_rgba(59,130,246,1)_50%,_rgba(59,130,246,1)_75%,_rgba(96,165,250,1)_75%)] bg-[length:40px_40px] animate-stripes transition-all duration-500"
+        :style="{ width: progress + '%' }"
+      ></div>
+    </div>
+
+    <!-- Upload Result -->
+    <div
+      v-if="result"
+      class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3 text-sm sm:text-base"
+    >
+      <div class="flex items-center gap-2">
+        <ChartBarIcon class="h-5 w-5 text-indigo-500" />
+        <span class="font-semibold">{{ $t('labels.rgaCategory') }}:</span>
+        <span>{{ result.rga_category }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <EyeDropperIcon class="h-5 w-5 text-pink-500" />
+        <span class="font-semibold">{{ $t('labels.nudityScore') }}:</span>
+        <span>
+          {{ $t('labels.sexy') }}: {{ result.nudity.sexy }}% — {{ $t('labels.porn') }}:
+          {{ result.nudity.porn }}%
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <TagIcon class="h-5 w-5 text-green-500" />
+        <span class="font-semibold">{{ $t('labels.hashtags') }}:</span>
+        <span>{{ result.hashtags || $t('messages.none') }}</span>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <p v-if="message" class="text-center text-green-600 dark:text-green-400 text-sm font-medium">
+      {{ message }}
+    </p>
+
+    <!-- Footer Actions -->
+    <div class="flex justify-center pt-4">
+      <button
+        @click="$emit('close')"
+        class="px-6 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium transition"
+      >
+        {{ $t('buttons.close') }}
       </button>
-
-      <!-- Modal Title -->
-      <h3 class="text-lg sm:text-2xl font-semibold text-center">
-        {{ $t('buttons.upload') }}
-      </h3>
-
-      <!-- Upload Section -->
-      <div v-if="type === 'upload'" class="space-y-4">
-
-        <!-- File Input -->
-        <div class="text-center">
-          <label
-              for="fileInput"
-              class="inline-block px-6 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition cursor-pointer"
-          >
-            {{ file ? $t('buttons.chooseAnother') : $t('buttons.chooseFile') }}
-          </label>
-          <input
-              id="fileInput"
-              type="file"
-              class="hidden"
-              @change="onFileChange"
-          />
-          <p v-if="file?.name" class="mt-2 text-sm text-gray-700 dark:text-gray-300 truncate">
-            📁 {{ file.name }}
-          </p>
-        </div>
-
-        <!-- Progress Bar -->
-        <div v-if="uploading" class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-          <div
-              class="bg-green-600 h-full transition-all duration-500"
-              :style="{ width: progress + '%' }"
-          ></div>
-        </div>
-
-        <!-- Upload Result -->
-        <div v-if="result" class="border-t pt-4 mt-4 space-y-2 text-sm text-left sm:text-base">
-          <p>
-            <span class="font-semibold">📊 {{ $t('labels.rgaCategory') }}:</span>
-            {{ result.rga_category }}
-          </p>
-          <p>
-            <span class="font-semibold">🔞 {{ $t('labels.nudityScore') }}:</span>
-            {{ $t('labels.sexy') }}: {{ result.nudity.sexy }}%
-            {{ $t('labels.porn') }}: {{ result.nudity.porn }}%
-          </p>
-          <p>
-            <span class="font-semibold">🏷️ {{ $t('labels.hashtags') }}:</span>
-            {{ result.hashtags || $t('messages.none') }}
-          </p>
-        </div>
-
-        <!-- Upload Message -->
-        <p v-if="message" class="text-sm text-green-600 dark:text-green-400 text-center">
-          {{ message }}
-        </p>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="flex justify-center pt-2">
-        <button
-            @click="$emit('close')"
-            class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition text-sm sm:text-base font-medium"
-        >
-          {{ $t('buttons.close') }}
-        </button>
-      </div>
-
     </div>
   </div>
 </template>
@@ -89,12 +82,18 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUploadStore } from '@/app/stores/upload';
-import { useMediaStore } from "@/app/stores/media";
-import {useRouter} from "vue-router";
+import { useMediaStore } from '@/app/stores/media';
+import { useRouter } from 'vue-router';
 
-defineProps<{ type: string }>();
+import {
+  ArrowUpTrayIcon,
+  DocumentIcon,
+  ChartBarIcon,
+  EyeDropperIcon,
+  TagIcon,
+} from '@heroicons/vue/24/outline';
+
 const emit = defineEmits(['close', 'upload-finished']);
-
 const router = useRouter();
 
 const file = ref<File | null>(null);
@@ -116,27 +115,11 @@ async function onFileChange(e: Event) {
 
     if (res) {
       result.value = res;
-        await fetchMedia(res.media_type);
-        await router.push(res.media_type + "s")
+      await fetchMedia(res.media_type);
+      await router.push(res.media_type + 's');
 
-        emit('upload-finished', result.value?.media_type);
+      emit('upload-finished', result.value?.media_type);
     }
   }
 }
 </script>
-
-<style scoped>
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
-</style>

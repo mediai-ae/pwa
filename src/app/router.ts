@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/app',
       name: 'home',
-      redirect: { name: 'texts'},
+      redirect: { name: 'texts' },
       component: () => import('@/app/layouts/MainLayout.vue'),
       meta: {
         middleware: 'auth',
@@ -18,9 +18,9 @@ const router = createRouter({
           component: () => import('@/app/views/Tokens.vue'),
         },
         {
-          path: "media",
-          name: "media-layout",
-          component: () => import("@/app/layouts/MediaLayout.vue"),
+          path: 'media',
+          name: 'media-layout',
+          component: () => import('@/app/layouts/MediaLayout.vue'),
           children: [
             {
               path: 'texts',

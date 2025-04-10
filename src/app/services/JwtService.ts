@@ -1,4 +1,4 @@
-const ID_TOKEN_KEY = "id_token" as string;
+const ID_TOKEN_KEY = 'id_token' as string;
 
 /**
  * @description get token form localStorage

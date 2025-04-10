@@ -1,96 +1,98 @@
 <template>
-  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 animate-fadeIn px-2">
-    <div class="relative w-full max-w-2xl bg-white dark:bg-secondary-dark text-black dark:text-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] p-4 sm:p-6 space-y-6">
+  <div class="space-y-8">
+    <!-- Modal Title -->
+    <h3 class="text-2xl font-bold text-center text-gray-800 dark:text-white">
+      {{ $t('titles.generateSubtitle') }}
+    </h3>
 
-      <!-- Close Button -->
-      <button
-          @click="$emit('close')"
-          class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-white transition"
-          aria-label="Close"
+    <!-- Language Selector -->
+    <div class="space-y-2 text-sm sm:text-base">
+      <label for="language" class="block font-medium text-gray-700 dark:text-gray-200">
+        {{ $t('labels.selectLanguage') }}
+      </label>
+      <select
+        id="language"
+        v-model="selectedLanguage"
+        class="w-full px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10 3.636 5.05a1 1 0 011.414-1.414L10 8.586z" clip-rule="evenodd"/>
-        </svg>
+        <option value="en">English</option>
+        <option value="fa">فارسی</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+      </select>
+    </div>
+
+    <!-- Confirm Button -->
+    <div class="text-center">
+      <button
+        @click="startSubtitleGeneration"
+        :disabled="generating"
+        :aria-busy="generating"
+        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition disabled:opacity-50"
+      >
+        {{ generating ? $t('buttons.generatingSubtitle') : $t('buttons.generateSubtitle') }}
       </button>
+    </div>
 
-      <!-- Modal Title -->
-      <h3 class="text-lg sm:text-2xl font-semibold text-center">
-        {{ $t('titles.generateSubtitle') }}
-      </h3>
+    <!-- Pitch Contour -->
+    <div v-if="pitchImage" class="space-y-2">
+      <h4 class="font-semibold text-gray-800 dark:text-white">
+        {{ $t('labels.pitchContour') }}
+      </h4>
+      <img
+        :src="pitchImage"
+        alt="Pitch Contour"
+        class="w-full max-w-lg mx-auto rounded shadow-md"
+      />
+    </div>
 
-      <!-- Language Selector -->
-      <div class="text-sm sm:text-base">
-        <label for="language" class="font-medium block mb-1">{{ $t('labels.selectLanguage') }}</label>
-        <select
-            id="language"
-            v-model="selectedLanguage"
-            aria-label="Language selector"
-            class="w-full p-2 rounded-xl bg-gray-100 dark:bg-gray-800"
-        >
-          <option value="en">English</option>
-          <option value="fa">فارسی</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="it">Italiano</option>
-        </select>
-      </div>
+    <!-- Clean Audio -->
+    <div v-if="cleanAudio" class="space-y-2">
+      <h4 class="font-semibold text-gray-800 dark:text-white">
+        {{ $t('labels.cleanAudio') }}
+      </h4>
+      <audio :src="cleanAudio" controls class="w-full max-w-lg mx-auto block rounded-md" />
+    </div>
 
-      <!-- Confirm Button -->
-      <div class="text-center">
-        <button
-            @click="startSubtitleGeneration"
-            :disabled="generating"
-            :aria-busy="generating"
-            class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition disabled:opacity-50"
-        >
-          {{ generating ? $t('buttons.generatingSubtitle') : $t('buttons.generateSubtitle') }}
-        </button>
-      </div>
+    <!-- Subtitle Links -->
+    <div
+      v-if="mergedLink && translatedLink"
+      class="text-sm space-y-1 text-gray-700 dark:text-gray-300"
+    >
+      <p>
+        {{ $t('labels.originalSubtitle') }}:
+        <a :href="mergedLink" class="text-blue-600 hover:underline font-medium">
+          {{ $t('labels.download') }}
+        </a>
+      </p>
+      <p>
+        {{ $t('labels.translatedSubtitle') }}:
+        <a :href="translatedLink" class="text-blue-600 hover:underline font-medium">
+          {{ $t('labels.download') }}
+        </a>
+      </p>
+    </div>
 
-      <!-- Pitch -->
-      <div v-if="pitchImage">
-        <h4 class="font-semibold mb-2">{{ $t('labels.pitchContour') }}</h4>
-        <img :src="pitchImage" alt="Pitch Contour" class="max-w-full rounded shadow" />
-      </div>
+    <!-- Final Download Button -->
+    <div v-if="ready" class="text-center">
+      <button
+        @click="downloadFinal"
+        class="mt-4 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium transition"
+      >
+        {{ $t('buttons.downloadFinalSubtitle') }}
+      </button>
+    </div>
 
-      <!-- Clean Audio -->
-      <div v-if="cleanAudio">
-        <h4 class="font-semibold mb-2">{{ $t('labels.cleanAudio') }}</h4>
-        <audio :src="cleanAudio" controls class="w-full"></audio>
-      </div>
-
-      <!-- Subtitle Links -->
-      <div v-if="mergedLink && translatedLink" class="text-sm space-y-1">
-        <p>
-          {{ $t('labels.originalSubtitle') }}:
-          <a :href="mergedLink" class="text-blue-600 hover:underline">{{ $t('labels.download') }}</a>
-        </p>
-        <p>
-          {{ $t('labels.translatedSubtitle') }}:
-          <a :href="translatedLink" class="text-blue-600 hover:underline">{{ $t('labels.download') }}</a>
-        </p>
-      </div>
-
-      <!-- Final Download Button -->
-      <div v-if="ready" class="text-center">
-        <button
-            @click="downloadFinal"
-            class="mt-4 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition"
-        >
-          {{ $t('buttons.downloadFinalSubtitle') }}
-        </button>
-      </div>
-
-      <!-- Bottom Close Button -->
-      <div class="flex justify-center pt-2">
-        <button
-            @click="$emit('close')"
-            class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition text-sm sm:text-base font-medium"
-        >
-          {{ $t('buttons.close') }}
-        </button>
-      </div>
+    <!-- Bottom Close Button -->
+    <div class="flex justify-center pt-4">
+      <button
+        @click="$emit('close')"
+        class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition"
+      >
+        {{ $t('buttons.close') }}
+      </button>
     </div>
   </div>
 </template>
@@ -100,7 +102,7 @@ import { ref, onUnmounted } from 'vue';
 import { useMediaStore } from '@/app/stores/media';
 
 const props = defineProps<{ mediaId: number }>();
-const emit = defineEmits(['close']);
+defineEmits(['close']);
 
 const selectedLanguage = ref('en');
 const generating = ref(false);
@@ -149,7 +151,6 @@ const startSubtitleGeneration = async () => {
         clearInterval(interval);
       }
     }, 2000);
-
   } catch (error) {
     console.error('Subtitle generation failed:', error);
     generating.value = false;
@@ -167,19 +168,3 @@ onUnmounted(() => {
   if (interval) clearInterval(interval);
 });
 </script>
-
-<style scoped>
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
-</style>

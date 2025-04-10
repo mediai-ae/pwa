@@ -1,142 +1,125 @@
 <template>
-  <div class="border rounded p-4 shadow-sm">
-    <!-- Media Display (skip image display in full mode) -->
-    <div class="mb-2">
+  <div
+    class="rounded-2xl border border-gray-200 dark:border-gray-700 shadow p-4 space-y-4 transition hover:shadow-md bg-white dark:bg-gray-900"
+  >
+    <!-- Media Display -->
+    <div>
       <template v-if="!isExpanded">
         <img
-            v-if="media.thumbnail"
-            :src="media.thumbnail"
-            alt="thumbnail"
-            class="w-full h-40 object-cover rounded"
+          v-if="media.thumbnail"
+          :src="media.thumbnail"
+          alt="thumbnail"
+          class="w-full h-40 object-cover rounded-xl"
         />
       </template>
       <template v-else>
         <video
-            v-if="media.media_type === 'video'"
-            :src="media.url"
-            controls
-            class="w-full rounded"
+          v-if="media.media_type === 'video'"
+          :src="media.url"
+          controls
+          class="w-full rounded-xl"
         />
         <audio
-            v-else-if="media.media_type === 'audio'"
-            :src="media.url"
-            controls
-            class="w-full"
+          v-else-if="media.media_type === 'audio'"
+          :src="media.url"
+          controls
+          class="w-full rounded-xl"
         />
         <div
-            v-else-if="media.media_type === 'text'"
-            class="max-h-40 overflow-auto text-sm text-gray-800 whitespace-pre-wrap break-words border p-2 rounded bg-gray-50"
+          v-else-if="media.media_type === 'text'"
+          class="max-h-40 overflow-auto text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap break-words border border-gray-300 dark:border-gray-600 p-2 rounded-xl bg-gray-50 dark:bg-gray-800"
         >
           {{ media.url }}
         </div>
       </template>
     </div>
 
-    <!-- Filename -->
-    <h3 class="font-semibold text-lg mb-1">{{ media.filename }}</h3>
+    <!-- Title -->
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+      {{ media.filename }}
+    </h3>
 
-    <!-- Nudity Score -->
-    <div v-if="media.nudity.sexy || media.nudity.porn" class="text-sm text-gray-600 mb-1">
+    <!-- Scores -->
+    <div
+      v-if="media.nudity.sexy || media.nudity.porn"
+      class="text-sm text-gray-600 dark:text-gray-400 space-y-1"
+    >
       <p v-if="media.nudity.sexy">{{ $t('labels.sexy') }}: {{ media.nudity.sexy }}%</p>
       <p v-if="media.nudity.porn">{{ $t('labels.porn') }}: {{ media.nudity.porn }}%</p>
     </div>
 
     <!-- Metadata -->
-    <p class="text-sm text-gray-600">Type: {{ media.media_type }}</p>
-    <p class="text-sm text-gray-600">RGA: {{ media.rga_category }}</p>
+    <div class="text-sm text-gray-600 dark:text-gray-400">
+      <p>
+        Type: <span class="font-medium">{{ media.media_type }}</span>
+      </p>
+      <p>
+        RGA: <span class="font-medium">{{ media.rga_category }}</span>
+      </p>
+    </div>
 
     <!-- Hashtags -->
-    <div class="my-2">
+    <div v-if="media.hashtags.length" class="flex flex-wrap gap-1">
       <span
-          v-for="tag in media.hashtags"
-          :key="tag"
-          class="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded mr-1 text-xs"
+        v-for="tag in media.hashtags"
+        :key="tag"
+        class="bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-100 px-2 py-1 rounded-full text-xs"
       >
         #{{ tag }}
       </span>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="mt-4 flex flex-wrap gap-2">
-      <!-- Original video buttons -->
+    <!-- Actions -->
+    <div class="flex flex-wrap items-center gap-2 pt-2">
       <template v-if="media.media_type === 'video'">
         <button
-            @click="handleModal('content', media.id)"
-            class="btn flex items-center justify-center gap-2"
-            :disabled="buttonLoading['content']"
-            :class="{ 'opacity-50 cursor-not-allowed': buttonLoading['content'] }"
+          @click="handleModal('content', media.id)"
+          class="btn"
+          :disabled="buttonLoading['content']"
         >
           <Loading v-if="buttonLoading['content']" />
-          <span>
-            {{
-              buttonLoading['content']
-                  ? t('buttons.analyzingContent')
-                  : t('buttons.analyzeContent')
-            }}
-          </span>
+          <span>{{
+            buttonLoading['content'] ? t('buttons.analyzingContent') : t('buttons.analyzeContent')
+          }}</span>
         </button>
 
-        <button
-            @click="handleModal('ad', media.id)"
-            class="btn flex items-center justify-center gap-2"
-            :disabled="buttonLoading['ad']"
-            :class="{ 'opacity-50 cursor-not-allowed': buttonLoading['ad'] }"
-        >
+        <button @click="handleModal('ad', media.id)" class="btn" :disabled="buttonLoading['ad']">
           <Loading v-if="buttonLoading['ad']" />
-          <span>
-            {{
-              buttonLoading['ad']
-                  ? t('buttons.analyzingAd')
-                  : t('buttons.analyzeAd')
-            }}
-          </span>
+          <span>{{ buttonLoading['ad'] ? t('buttons.analyzingAd') : t('buttons.analyzeAd') }}</span>
         </button>
 
         <button
-            @click="openSubtitleLanguageSelector(media.id)"
-            class="btn flex items-center justify-center gap-2"
-            :disabled="buttonLoading['subtitle']"
-            :class="{ 'opacity-50 cursor-not-allowed': buttonLoading['subtitle'] }"
+          @click="openSubtitleLanguageSelector(media.id)"
+          class="btn"
+          :disabled="buttonLoading['subtitle']"
         >
           <Loading v-if="buttonLoading['subtitle']" />
-          <span>
-            {{
-              buttonLoading['subtitle']
-                  ? t('buttons.generatingSubtitle')
-                  : t('buttons.generateSubtitle')
-            }}
-          </span>
+          <span>{{
+            buttonLoading['subtitle']
+              ? t('buttons.generatingSubtitle')
+              : t('buttons.generateSubtitle')
+          }}</span>
         </button>
       </template>
 
-      <!-- Show Full Eye Icon Button -->
+      <!-- Toggle Full View -->
       <button
-          v-if="media.media_type !== 'image'"
-          class="btn flex items-center justify-center"
-          @click="toggleShowFull"
+        v-if="media.media_type !== 'image'"
+        @click="toggleShowFull"
+        class="icon-btn"
+        :title="isExpanded ? t('buttons.hideDetails') : t('buttons.showDetails')"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
+        <EyeIcon class="w-5 h-5" />
       </button>
 
-      <!-- Delete Button -->
+      <!-- Delete -->
       <button
-          @click="handleDelete(media.id)"
-          class="btn bg-red-600 hover:bg-red-700 flex items-center gap-1"
-          :disabled="buttonLoading.delete"
-          :class="{ 'opacity-50 cursor-not-allowed': buttonLoading.delete }"
+        @click="handleDelete(media.id)"
+        class="icon-btn text-red-600 hover:text-red-700"
+        :disabled="buttonLoading.delete"
       >
         <Loading v-if="buttonLoading.delete" />
-        <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m-4 0h14" />
-        </svg>
+        <TrashIcon v-else class="w-5 h-5" />
       </button>
     </div>
   </div>
@@ -147,6 +130,7 @@ import { ref, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { type Media, useMediaStore } from '@/app/stores/media';
 import Loading from '@/app/components/Loading.vue';
+import { EyeIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
 defineProps<{ media: Media }>();
 
@@ -166,9 +150,7 @@ function toggleShowFull() {
 async function handleModal(type: 'content' | 'ad', id: number) {
   buttonLoading.value[type] = true;
   try {
-    const response = type === 'content'
-        ? await analyzeContent(id)
-        : await analyzeAd(id);
+    const response = type === 'content' ? await analyzeContent(id) : await analyzeAd(id);
     openModal?.(type, type === 'content' ? response.data : response.data.scene_data);
   } catch (error) {
     console.error(`Error loading ${type} modal:`, error);
@@ -195,9 +177,3 @@ async function handleDelete(id: number) {
   }
 }
 </script>
-
-<style scoped>
-.btn {
-  @apply px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded transition duration-200 ease-in-out;
-}
-</style>

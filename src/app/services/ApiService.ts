@@ -1,9 +1,9 @@
-import type { App } from "vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import JwtService from "@/app/services/JwtService";
-import type { AxiosResponse, AxiosRequestConfig } from "axios";
-import { useAuthStore } from "@/app/stores/auth";
+import type { App } from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import JwtService from '@/app/services/JwtService';
+import type { AxiosResponse, AxiosRequestConfig } from 'axios';
+import { useAuthStore } from '@/app/stores/auth';
 
 /**
  * @description service to call HTTP request via Axios
@@ -25,36 +25,29 @@ class ApiService {
     ApiService.setHeader();
 
     ApiService.vueInstance.axios.interceptors.response.use(
-        (response) => {
-          return response;
-        },
-        (error) => {
-          if (
-              error.request &&
-              error.request.status === 0 &&
-              error.request.response === ""
-          ) {
-            if (!window.navigator.onLine) {
-              alert("Check Your Internet Connection and Refresh Page");
-            } else {
-              alert("Check Your VPN Connection or our API service is probably down");
-            }
-          } else if (error.response && error.response.status === 401) {
-            const authStore = useAuthStore();
-            authStore.purgeAuth();
-          } else if (
-              error.response &&
-              ![404, 401].includes(error.response.status)
-          ) {
-            const message = error.response.data.message
-                ? error.response.data.message
-                : error.response.data.error;
-
-            alert(message);
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.request && error.request.status === 0 && error.request.response === '') {
+          if (!window.navigator.onLine) {
+            alert('Check Your Internet Connection and Refresh Page');
+          } else {
+            alert('Check Your VPN Connection or our API service is probably down');
           }
+        } else if (error.response && error.response.status === 401) {
+          const authStore = useAuthStore();
+          authStore.purgeAuth();
+        } else if (error.response && ![404, 401].includes(error.response.status)) {
+          const message = error.response.data.message
+            ? error.response.data.message
+            : error.response.data.error;
 
-          return Promise.reject(error);
+          alert(message);
         }
+
+        return Promise.reject(error);
+      },
     );
   }
 
@@ -62,13 +55,11 @@ class ApiService {
    * @description set the default HTTP request headers
    */
   public static setHeader(): void {
-    if(JwtService.getToken()) {
-      ApiService.vueInstance.axios.defaults.headers.common[
-          "Authorization"
-          ] = `Bearer ${JwtService.getToken()}`;
+    if (JwtService.getToken()) {
+      ApiService.vueInstance.axios.defaults.headers.common['Authorization'] =
+        `Bearer ${JwtService.getToken()}`;
     }
-    ApiService.vueInstance.axios.defaults.headers.common["Accept"] =
-      "application/json";
+    ApiService.vueInstance.axios.defaults.headers.common['Accept'] = 'application/json';
   }
 
   /**
@@ -87,10 +78,7 @@ class ApiService {
    * @param resource
    * @param slug
    */
-  public static get(
-    resource: string,
-    slug = "" as string
-  ): Promise<AxiosResponse> {
+  public static get(resource: string, slug = '' as string): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.get(`${resource}/${slug}`);
   }
 
@@ -104,7 +92,7 @@ class ApiService {
   public static post(
     resource: string,
     params: any,
-    config: AxiosRequestConfig = {}
+    config: AxiosRequestConfig = {},
   ): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.post(`${resource}`, params, config);
   }
@@ -116,11 +104,7 @@ class ApiService {
    * @param slug
    * @param params
    */
-  public static update(
-    resource: string,
-    slug: string,
-    params: any
-  ): Promise<AxiosResponse> {
+  public static update(resource: string, slug: string, params: any): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.put(`${resource}/${slug}`, params);
   }
 
@@ -134,7 +118,7 @@ class ApiService {
   public static put(
     resource: string,
     params: any,
-    config: AxiosRequestConfig = {}
+    config: AxiosRequestConfig = {},
   ): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.put(`${resource}`, params, config);
   }

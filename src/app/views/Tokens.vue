@@ -4,14 +4,14 @@
 
     <form @submit.prevent="handleCreate" class="space-y-4">
       <input
-          v-model="tokenName"
-          type="text"
-          placeholder="Token name"
-          class="w-full p-2 border rounded dark:bg-secondary-dark dark:border-gray-600"
+        v-model="tokenName"
+        type="text"
+        placeholder="Token name"
+        class="w-full p-2 border rounded dark:bg-secondary-dark dark:border-gray-600"
       />
       <button
-          type="submit"
-          class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+        type="submit"
+        class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
       >
         {{ t('tokens.create') }}
       </button>
@@ -32,17 +32,19 @@
 
     <ul v-if="tokenStore.tokens.length" class="space-y-2">
       <li
-          v-for="token in tokenStore.tokens"
-          :key="token.id"
-          class="p-3 border rounded flex items-center justify-between dark:border-gray-600"
+        v-for="token in tokenStore.tokens"
+        :key="token.id"
+        class="p-3 border rounded flex items-center justify-between dark:border-gray-600"
       >
         <div>
-          <p><strong>{{ token.name }}</strong></p>
+          <p>
+            <strong>{{ token.name }}</strong>
+          </p>
           <p class="text-sm text-gray-600 dark:text-gray-400">{{ token.created_at }}</p>
         </div>
         <button
-            @click="tokenStore.deleteToken(token.id)"
-            class="text-red-600 hover:text-red-800 text-sm"
+          @click="tokenStore.deleteToken(token.id)"
+          class="text-red-600 hover:text-red-800 text-sm"
         >
           {{ t('tokens.delete') }}
         </button>

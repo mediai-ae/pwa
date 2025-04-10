@@ -1,23 +1,25 @@
 <template>
   <div>
-      <div class="tabs flex text-center shadow transition text-black bg-gray-100 dark:text-white dark:bg-secondary-dark">
-        <router-link class="tab flex-1 py-3" :to="{ name: 'texts' }" active-class="active">
-          {{ t('navigation.texts') }}
-        </router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'images' }" active-class="active">
-          {{ t('navigation.images') }}
-        </router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'audios' }" active-class="active">
-          {{ t('navigation.audios') }}
-        </router-link>
-        <router-link class="tab flex-1 py-3" :to="{ name: 'videos' }" active-class="active">
-          {{ t('navigation.videos') }}
-        </router-link>
-      </div>
+    <div
+      class="tabs flex text-center shadow transition text-black bg-gray-100 dark:text-white dark:bg-secondary-dark"
+    >
+      <router-link class="tab flex-1 py-3" :to="{ name: 'texts' }" active-class="active">
+        {{ t('navigation.texts') }}
+      </router-link>
+      <router-link class="tab flex-1 py-3" :to="{ name: 'images' }" active-class="active">
+        {{ t('navigation.images') }}
+      </router-link>
+      <router-link class="tab flex-1 py-3" :to="{ name: 'audios' }" active-class="active">
+        {{ t('navigation.audios') }}
+      </router-link>
+      <router-link class="tab flex-1 py-3" :to="{ name: 'videos' }" active-class="active">
+        {{ t('navigation.videos') }}
+      </router-link>
+    </div>
 
-      <main class="p-4 transition-all duration-300">
-        <router-view />
-      </main>
+    <main class="p-4 transition-all duration-300">
+      <router-view />
+    </main>
   </div>
 </template>
 

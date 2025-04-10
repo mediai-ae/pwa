@@ -1,12 +1,10 @@
 <template>
   <div :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'" :class="{ dark: isDark }">
-    <div class="min-h-screen font-tahoma transition-colors duration-500 bg-white text-black dark:bg-primary-dark dark:text-white">
+    <div
+      class="min-h-screen font-tahoma transition-colors duration-500 bg-white text-black dark:bg-primary-dark dark:text-white"
+    >
       <!-- Header -->
-      <Header
-          :locale="locale"
-          @change-locale="changeLocale"
-          @toggle-dark="toggleDark"
-      />
+      <Header :locale="locale" @change-locale="changeLocale" @toggle-dark="toggleDark" />
 
       <main class="transition-all duration-300">
         <router-view />
@@ -24,7 +22,7 @@ import { useI18n } from 'vue-i18n';
 import Header from '@/app/components/Header.vue';
 import Modals from '@/app/components/Modals/Modals.vue';
 
-const { locale, t } = useI18n(); // 👈 add t
+const { locale } = useI18n(); // 👈 add t
 const isDark = ref(true);
 
 onMounted(() => {

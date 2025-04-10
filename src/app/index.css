@@ -2,8 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Button Style */
 .btn {
-    @apply px-4 py-2 rounded transition;
-    @apply bg-gray-200 text-black hover:bg-gray-300;
-    @apply dark:bg-accent-soft dark:text-white dark:hover:bg-accent;
+    @apply inline-flex items-center gap-2 justify-center text-sm font-medium px-4 py-2 rounded-lg transition duration-200;
+    @apply bg-indigo-600 text-white hover:bg-indigo-700;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Icon Button */
+.icon-btn {
+    @apply p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition;
+}
+
+/* Header Toolbar Buttons */
+.toolbar-btn {
+    @apply inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all;
+    @apply bg-gray-100 text-black hover:bg-gray-200;
+    @apply dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700;
+    @apply border border-gray-300 dark:border-gray-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+}
+
+/* Search-specific button */
+.search-btn {
+    @apply bg-transparent text-inherit border-none shadow-none hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+/* Search icon animation */
+.search-btn .icon {
+    @apply transition-transform duration-200 ease-in-out;
+}
+.search-btn:hover .icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Progress bar stripes */
+@keyframes stripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 0;
+    }
+}
+.animate-stripes {
+    animation: stripes 1s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
 }
