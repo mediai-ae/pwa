@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-xl mx-auto space-y-6">
+  <div class="max-w-xl mx-auto space-y-6 p-5">
     <h1 class="text-xl font-bold">{{ t('tokens.title') }}</h1>
 
     <form @submit.prevent="handleCreate" class="space-y-4">

@@ -4,45 +4,50 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: '/app',
+      name: 'home',
+      redirect: { name: 'texts'},
       component: () => import('@/app/layouts/MainLayout.vue'),
       meta: {
         middleware: 'auth',
       },
       children: [
         {
-          path: '/app',
-          redirect: '/app/texts',
-        },
-        {
-          path: '/app/texts',
-          name: 'texts',
-          component: () => import('@/app/views/Media.vue'),
-        },
-        {
-          path: '/app/images',
-          name: 'images',
-          component: () => import('@/app/views/Media.vue'),
-        },
-        {
-          path: '/app/audios',
-          name: 'audios',
-          component: () => import('@/app/views/Media.vue'),
-        },
-        {
-          path: '/app/videos',
-          name: 'videos',
-          component: () => import('@/app/views/Media.vue'),
-        },
-        {
-          path: '/app/tokens',
+          path: 'tokens',
           name: 'tokens',
           component: () => import('@/app/views/Tokens.vue'),
+        },
+        {
+          path: "media",
+          name: "media-layout",
+          component: () => import("@/app/layouts/MediaLayout.vue"),
+          children: [
+            {
+              path: 'texts',
+              name: 'texts',
+              component: () => import('@/app/views/Media.vue'),
+            },
+            {
+              path: 'images',
+              name: 'images',
+              component: () => import('@/app/views/Media.vue'),
+            },
+            {
+              path: 'audios',
+              name: 'audios',
+              component: () => import('@/app/views/Media.vue'),
+            },
+            {
+              path: 'videos',
+              name: 'videos',
+              component: () => import('@/app/views/Media.vue'),
+            },
+          ],
         },
       ],
     },
     {
-      path: '/app/sign-in',
+      path: '/sign-in',
       name: 'sign-in',
       component: () => import('@/app/views/Login.vue'),
     },
@@ -55,7 +60,6 @@ router.beforeEach((to, _from, next) => {
 
   if (requiresAuth && !isLoggedIn) {
     next({ name: 'sign-in' });
-    // next()
   } else {
     next();
   }

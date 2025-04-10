@@ -49,7 +49,7 @@
         </transition>
 
         <!-- Profile Link -->
-        <RouterLink to="/profile" class="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700">
+        <RouterLink :to="{name:'tokens'}" class="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700">
           <UserCircleIcon class="icon rtl-icon" />
           {{ t('buttons.profile') }}
         </RouterLink>

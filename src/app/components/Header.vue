@@ -4,12 +4,12 @@
     <div class="p-4 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
       <!-- Logo + Mobile Profile -->
       <div class="flex justify-between items-center w-full sm:w-auto">
-        <div class="flex items-center gap-2">
+        <RouterLink :to="{name:'home'}" class="flex items-center gap-2">
           <img src="/logo.svg" alt="Mediai Logo" class="h-8 w-8" />
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight">
             Mediai
           </h1>
-        </div>
+        </RouterLink>
 
         <!-- Profile (Mobile Only) -->
         <div class="relative sm:hidden">
@@ -67,6 +67,7 @@ import {
   MagnifyingGlassIcon,
   LightBulbIcon
 } from '@heroicons/vue/24/outline'
+import {RouterLink} from "vue-router";
 
 const emit = defineEmits(['toggle-dark', 'change-locale'])
 const { t } = useI18n()
