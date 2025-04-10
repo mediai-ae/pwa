@@ -19,14 +19,14 @@
       >
         <!-- Dark Mode -->
         <button @click="$emit('toggle-dark')" class="dropdown-item">
-          <MoonIcon class="icon" />
+          <MoonIcon class="icon rtl-icon" />
           {{ t('buttons.darkMode') }}
         </button>
 
         <!-- Language Toggle -->
         <button @click="langOpen = !langOpen" class="dropdown-item justify-between">
           <span class="flex items-center gap-2">
-            <GlobeAltIcon class="icon" />
+            <GlobeAltIcon class="icon rtl-icon" />
             {{ t('buttons.language') }}
           </span>
           <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -38,11 +38,11 @@
         <transition name="fade">
           <div v-if="langOpen" :class="['pl-4', isRTL ? 'text-right pr-4' : 'text-left']">
             <button @click="changeLocale('en')" class="dropdown-item">
-              <img src="/flags/US.svg" alt="English" class="h-4 mr-2 rounded-sm" />
+              <img src="/flags/US.svg" alt="English" class="h-4 rounded-sm" :class="isRTL ? 'ml-2' : 'mr-2'" />
               English
             </button>
             <button @click="changeLocale('ar')" class="dropdown-item">
-              <img src="/flags/SA.svg" alt="Arabic" class="h-4 mr-2 rounded-sm" />
+              <img src="/flags/SA.svg" alt="Arabic" class="h-4 rounded-sm" :class="isRTL ? 'ml-2' : 'mr-2'" />
               العربية
             </button>
           </div>
@@ -50,7 +50,7 @@
 
         <!-- Profile Link -->
         <RouterLink to="/profile" class="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700">
-          <UserCircleIcon class="icon" />
+          <UserCircleIcon class="icon rtl-icon" />
           {{ t('buttons.profile') }}
         </RouterLink>
 
@@ -58,7 +58,7 @@
 
         <!-- Sign Out -->
         <button class="dropdown-item text-red-600 hover:bg-red-50 dark:hover:bg-red-900">
-          <ArrowRightOnRectangleIcon class="icon" />
+          <ArrowRightOnRectangleIcon class="icon rtl-icon" />
           {{ t('buttons.signOut') }}
         </button>
       </div>
@@ -112,7 +112,11 @@ onBeforeUnmount(() => {
 }
 
 .icon {
-  @apply w-5 h-5 mr-2 shrink-0 text-gray-600 dark:text-gray-300;
+  @apply w-5 h-5 shrink-0 text-gray-600 dark:text-gray-300;
+}
+
+.rtl-icon {
+  margin-inline-end: 0.5rem;
 }
 
 .fade-enter-active,

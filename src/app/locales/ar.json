@@ -2,59 +2,63 @@
   "header": {
     "title": "معرض المحتوى",
     "dashboard": "لوحة التحكم",
-    "toggleTheme": "تبديل المظهر"
+    "toggleTheme": "تبديل الوضع"
   },
   "buttons": {
     "chooseFile": "اختر ملفًا",
     "upload": "رفع",
-    "uploading": "جارٍ الرفع...",
+    "uploading": "جاري الرفع...",
     "search": "بحث",
     "recommend": "توصية",
     "chooseAnother": "اختر ملفًا آخر",
     "close": "إغلاق",
-    "approve": "قبول",
+    "approve": "موافقة",
     "reject": "رفض",
     "analyzeContent": "تحليل المحتوى",
-    "analyzingContent": "جارٍ التحليل...",
+    "analyzingContent": "جاري التحليل...",
     "analyzeAd": "تحليل الإعلان",
-    "analyzingAd": "جارٍ تحليل الإعلان...",
+    "analyzingAd": "جاري تحليل الإعلان...",
     "generateSubtitle": "إنشاء الترجمة",
-    "generatingSubtitle": "جارٍ الإنشاء...",
+    "generatingSubtitle": "جاري الإنشاء...",
     "downloadFinalSubtitle": "تحميل الترجمة النهائية",
     "showFull": "عرض كامل",
     "hideFull": "إخفاء",
     "delete": "حذف",
-    "deleting": "جارٍ الحذف..."
+    "deleting": "جاري الحذف...",
+    "profile": "الملف الشخصي",
+    "darkMode": "الوضع الليلي",
+    "language": "اللغة",
+    "signOut": "تسجيل الخروج"
   },
   "login": {
-    "title": "مرحبًا بك في Mediai",
+    "title": "مرحبًا بك في ميدياي",
     "subtitle": "يرجى تسجيل الدخول للوصول إلى التطبيق.",
     "or": "أو",
     "usernamePlaceholder": "اسم المستخدم",
     "passwordPlaceholder": "كلمة المرور",
-    "loginButton": "تسجيل الدخول باسم المستخدم",
+    "loginButton": "تسجيل الدخول باستخدام اسم المستخدم",
     "googleButton": "تسجيل الدخول باستخدام جوجل",
-    "googleError": "فشل تسجيل الدخول عبر جوجل",
+    "googleError": "فشل تسجيل الدخول بجوجل",
     "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة"
   },
   "titles": {
     "analysisResults": "نتائج التحليل",
-    "sceneAnalysis": "تحليل المشاهد",
+    "sceneAnalysis": "نتائج تحليل المشهد",
     "generateSubtitle": "إنشاء الترجمة",
-    "recommendation": "توصيات المحتوى"
+    "recommendation": "توصية المحتوى"
   },
   "table": {
     "frame": "الإطار",
-    "time": "الوقت (ث)",
+    "time": "الوقت (ثانية)",
     "hashtags": "الوسوم",
     "rga": "RGA",
     "actions": "الإجراءات",
-    "sceneId": "معرف المشهد",
+    "sceneId": "معرّف المشهد",
     "keyFrame": "الإطار الرئيسي",
     "saliencyMap": "خريطة البروز",
-    "emptySpace": "مساحة فارغة",
+    "emptySpace": "المساحة الفارغة",
     "emotion": "العاطفة الوجهية",
-    "billboards": "اللوحات الإعلانية",
+    "billboards": "اللافتات",
     "saliencyScore": "درجة البروز",
     "motionScore": "الحركة",
     "dominantColor": "اللون السائد",
@@ -62,9 +66,9 @@
     "score": "الدرجة",
     "isBest": "الأفضل",
     "filename": "اسم الملف",
-    "cosineSimilarity": "تشابه جيبي",
+    "cosineSimilarity": "تشابه جيبي التمام",
     "commonHashtags": "الوسوم المشتركة",
-    "totalScore": "إجمالي الدرجة",
+    "totalScore": "الدرجة الكلية",
     "thumbnail": "الصورة المصغرة"
   },
   "labels": {
@@ -80,31 +84,31 @@
     "originalSubtitle": "الترجمة الأصلية",
     "translatedSubtitle": "الترجمة المترجمة",
     "download": "تحميل",
-    "selectMedia": "اختر ملف وسائط"
+    "selectMedia": "اختر ملف الوسائط"
   },
   "messages": {
     "noAnalysisData": "لا توجد بيانات تحليل متاحة.",
     "noHashtags": "----",
     "none": "لا يوجد",
-    "recommendationError": "حدث خطأ أثناء التوصية بالمحتوى",
+    "recommendationError": "حدث خطأ أثناء توصية المحتوى",
     "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا الملف؟"
   },
   "navigation": {
     "texts": "نصوص",
     "images": "صور",
-    "audios": "صوتيات",
+    "audios": "ملفات صوتية",
     "videos": "فيديوهات"
   },
   "rga": {
-    "high": "عالٍ",
+    "high": "مرتفع",
     "medium": "متوسط",
     "low": "منخفض"
   },
   "search": {
-    "title": "بحث",
+    "title": "البحث",
     "labels": {
-      "searchQuery": "عبارة البحث",
-      "dragDropText": "اسحب وأسقط صورة هنا\nأو انقر لاختيار واحدة"
+      "searchQuery": "كلمة البحث",
+      "dragDropText": "اسحب وأفلت صورة هنا\nأو انقر للاختيار"
     },
     "buttons": {
       "textSearch": "بحث نصي",
@@ -112,7 +116,7 @@
     },
     "table": {
       "name": "الاسم",
-      "thumbnail": "الصورة المصغرة",
+      "thumbnail": "صورة مصغرة",
       "hashtags": "الوسوم",
       "rga": "RGA",
       "fingerprint": "البصمة",
@@ -124,6 +128,14 @@
       "noResultsFound": "لم يتم العثور على نتائج",
       "searchError": "حدث خطأ أثناء البحث النصي",
       "imageSearchError": "حدث خطأ أثناء البحث بالصورة"
+    },
+    "tokens": {
+      "title": "رموز الوصول الشخصية",
+      "create": "إنشاء رمز",
+      "generated": "تم إنشاء الرمز بنجاح",
+      "list": "الرموز الخاصة بك",
+      "none": "لا توجد رموز حتى الآن",
+      "delete": "حذف"
     }
   }
 }

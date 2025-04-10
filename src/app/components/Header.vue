@@ -5,9 +5,9 @@
       <!-- Logo + Mobile Profile -->
       <div class="flex justify-between items-center w-full sm:w-auto">
         <div class="flex items-center gap-2">
-          <span class="text-2xl">🎬</span>
+          <img src="/logo.svg" alt="Mediai Logo" class="h-8 w-8" />
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight">
-            {{ t('header.dashboard') }}
+            Mediai
           </h1>
         </div>
 
