@@ -18,7 +18,7 @@ export const useTokenStore = defineStore('token', () => {
     loading.value = true;
     error.value = '';
     try {
-      const { data } = await ApiService.get('/tokens');
+      const { data } = await ApiService.query('/tokens',{});
       tokens.value = data.tokens;
     } catch (err) {
       console.error('Error fetching tokens:', err);
