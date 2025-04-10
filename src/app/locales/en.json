@@ -128,14 +128,14 @@
       "noResultsFound": "No results found",
       "searchError": "Error searching text",
       "imageSearchError": "Error searching by image"
-    },
-    "tokens": {
-      "title": "Personal Access Tokens",
-      "create": "Create Token",
-      "generated": "Token created successfully",
-      "list": "Your Tokens",
-      "none": "No tokens yet",
-      "delete": "Delete"
     }
-  }
+  },
+  "tokens": {
+    "title": "Personal Access Tokens",
+    "create": "Create Token",
+    "generated": "Token created successfully",
+    "list": "Your Tokens",
+    "none": "No tokens yet",
+    "delete": "Delete"
+    }
 }

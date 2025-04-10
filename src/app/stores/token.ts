@@ -18,7 +18,7 @@ export const useTokenStore = defineStore('token', () => {
         loading.value = true;
         error.value = '';
         try {
-            const { data } = await ApiService.get('/auth/tokens');
+            const { data } = await ApiService.get('/tokens');
             tokens.value = data.tokens;
         } catch (err) {
             console.error('Error fetching tokens:', err);
@@ -31,7 +31,7 @@ export const useTokenStore = defineStore('token', () => {
     const createToken = async (name: string) => {
         error.value = '';
         try {
-            const { data } = await ApiService.post('/auth/tokens', { name });
+            const { data } = await ApiService.post('/tokens', { name });
             createdToken.value = data.token;
             await fetchTokens();
         } catch (err) {
@@ -42,7 +42,7 @@ export const useTokenStore = defineStore('token', () => {
 
     const deleteToken = async (id: number) => {
         try {
-            await ApiService.delete(`/auth/tokens/${id}`);
+            await ApiService.delete(`/tokens/${id}`);
             tokens.value = tokens.value.filter(t => t.id !== id);
         } catch (err) {
             console.error('Error deleting token:', err);
