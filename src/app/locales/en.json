@@ -24,7 +24,11 @@
     "showFull": "Show Full",
     "hideFull": "Hide Full",
     "delete": "Delete",
-    "deleting": "Deleting..."
+    "deleting": "Deleting...",
+    "profile": "Profile",
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "signOut": "Sign Out"
   },
   "login": {
     "title": "Welcome to Mediai",
