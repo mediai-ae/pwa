@@ -62,9 +62,9 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('user');
   }
 
-  function logout() {
+  function signOut() {
     purgeAuth();
-    router.push('/sign-in');
+    router.push({name: 'sign-in'});
   }
 
   // === GET AUTH TOKEN ===
@@ -88,7 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = data.user;
     } catch (err: any) {
       console.error('Failed to fetch current user:', err);
-      logout();
+      signOut();
     }
   }
 
@@ -98,7 +98,7 @@ export const useAuthStore = defineStore('auth', () => {
     purgeAuth,
     signIn,
     signUp,
-    logout,
+    signOut,
     getAuthToken,
     loadUserFromStorage,
     fetchCurrentUser,

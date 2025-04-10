@@ -85,7 +85,7 @@
         <hr class="my-1 border-gray-200 dark:border-gray-700" />
 
         <!-- Sign Out -->
-        <button class="dropdown-item text-red-600 hover:bg-red-50 dark:hover:bg-red-900">
+        <button @click="signOut()" class="dropdown-item text-red-600 hover:bg-red-50 dark:hover:bg-red-900">
           <ArrowRightOnRectangleIcon class="icon rtl-icon" />
           {{ t('buttons.signOut') }}
         </button>
@@ -104,6 +104,7 @@ import {
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
 } from '@heroicons/vue/24/outline';
+import {useAuthStore} from "@/app/stores/auth";
 
 const emit = defineEmits(['toggle-dark', 'change-locale']);
 const { t, locale } = useI18n();
@@ -111,6 +112,9 @@ const menuOpen = ref(false);
 const langOpen = ref(false);
 const isRTL = computed(() => locale.value === 'ar');
 const dropdownRef = ref<HTMLElement | null>(null);
+
+const authStore = useAuthStore();
+const { signOut } = authStore;
 
 function changeLocale(lang: string) {
   emit('change-locale', lang);
