@@ -12,7 +12,7 @@
           class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-white transition"
           aria-label="Close"
       >
-        <!-- SVG icon... -->
+        <XCircleIcon class="w-6 h-6" />
       </button>
 
       <UploadModal v-if="activeModal === 'upload'" @close="emit('close')" />
@@ -37,6 +37,9 @@ import AdModal from '@/app/components/Modals/AdModal.vue';
 import SubtitleGenerationModal from '@/app/components/Modals/SubtitleGenerationModal.vue';
 import RecommendModal from '@/app/components/Modals/RecommendModal.vue';
 import SearchModal from '@/app/components/Modals/SearchModal.vue';
+import {
+  XCircleIcon,
+} from '@heroicons/vue/24/outline';
 
 defineProps<{
   activeModal: string;

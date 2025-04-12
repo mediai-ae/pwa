@@ -67,3 +67,20 @@
 code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
+
+.icon {
+    @apply w-5 h-5 shrink-0 text-gray-600 dark:text-gray-300;
+}
+
+.rtl-icon {
+    margin-inline-end: 0.5rem;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
