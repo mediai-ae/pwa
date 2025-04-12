@@ -35,9 +35,7 @@
         <div>
           <p class="font-medium">{{ token.name }}</p>
           <p class="text-sm text-gray-500 dark:text-gray-400">{{ token.created_at }}</p>
-          <p class="text-xs text-gray-400 mt-1">
-            {{ token.access_token }}
-          </p>
+          <p class="text-xs text-gray-400 mt-1 break-all">{{ token.access_token }}</p>
         </div>
         <button
             @click="tokenStore.deleteToken(token.id)"
@@ -50,27 +48,32 @@
     </ul>
     <p v-else class="text-gray-500">{{ t('tokens.none') }}</p>
 
+    <!-- Token Modal -->
     <Modal v-if="showTokenModal" :active-modal="'custom'" :modal-data="null" @close="closeModal">
       <div class="space-y-6 text-center">
         <h2 class="text-xl font-bold">{{ t('tokens.generated') }}</h2>
         <p class="text-sm text-gray-500 dark:text-gray-400">{{ t('tokens.copyInstruction') }}</p>
-        <div class="relative bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-left">
-          <code class="block break-words text-sm text-gray-800 dark:text-gray-100">
+
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-left flex items-start justify-between gap-4 flex-wrap">
+          <code class="break-all text-sm text-gray-800 dark:text-gray-100 w-full sm:w-auto flex-1">
             {{ tokenStore.createdToken }}
           </code>
           <button
               @click="copyToken"
-              class="absolute top-2 right-2 text-blue-600 hover:text-blue-800 text-xs flex items-center gap-1"
+              class="text-blue-600 hover:text-blue-800 text-xs flex items-center gap-1 whitespace-nowrap"
           >
             <ClipboardIcon class="w-4 h-4" />
-            <span>{{ t('buttons.copy') }}</span>
+            <span v-if="!copied">{{ t('buttons.copy') }}</span>
+            <span v-else>{{ t('buttons.copied') }}</span>
           </button>
         </div>
+
         <button
             @click="closeModal"
             class="px-6 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium transition"
         >
-          {{ t('buttons.close') }}</button>
+          {{ t('buttons.close') }}
+        </button>
       </div>
     </Modal>
   </div>
@@ -87,6 +90,7 @@ const { t } = useI18n();
 const tokenStore = useTokenStore();
 const tokenName = ref('');
 const showTokenModal = ref(false);
+const copied = ref(false);
 
 const handleCreate = async () => {
   if (tokenName.value.trim()) {
@@ -98,11 +102,14 @@ const handleCreate = async () => {
 const closeModal = () => {
   showTokenModal.value = false;
   tokenStore.createdToken = '';
+  copied.value = false;
 };
 
 const copyToken = async () => {
   try {
     await navigator.clipboard.writeText(tokenStore.createdToken);
+    copied.value = true;
+    setTimeout(() => (copied.value = false), 2000);
   } catch (e) {
     console.error('Failed to copy token', e);
   }

@@ -29,7 +29,8 @@
     "darkMode": "الوضع الداكن",
     "language": "اللغة",
     "signOut": "تسجيل الخروج",
-    "copy": "نسخ"
+    "copy": "نسخ",
+    "copied": "تم النسخ!"
   },
   "login": {
     "title": "مرحبًا بك في Mediai",

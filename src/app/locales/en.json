@@ -29,7 +29,8 @@
     "darkMode": "Dark Mode",
     "language": "Language",
     "signOut": "Sign Out",
-    "copy": "Copy"
+    "copy": "Copy",
+    "copied": "Copied!"
   },
   "login": {
     "title": "Welcome to Mediai",
