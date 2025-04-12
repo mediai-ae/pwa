@@ -60,7 +60,18 @@
       <div
           class="w-full sm:max-w-md bg-white dark:bg-secondary-dark shadow-xl rounded-2xl p-6 sm:p-8 space-y-6"
       >
-        <img src="/logo.svg" alt="Logo" class="w-20 h-20 mx-auto" />
+        <img
+            v-if="isDark"
+            src="/logo-dark.png"
+            alt="Dark Logo"
+            class="w-20 h20 mx-auto"
+        />
+        <img
+            v-else
+            src="/logo-light.png"
+            alt="Light Logo"
+            class="w-20 h-20 mx-auto"
+        />
         <h1 class="text-2xl font-bold text-center">{{ t('login.title') }}</h1>
         <p class="text-center text-gray-500 dark:text-gray-300">{{ t('login.subtitle') }}</p>
 

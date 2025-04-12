@@ -5,7 +5,18 @@
       <!-- Logo + Mobile Profile -->
       <div class="flex justify-between items-center w-full sm:w-auto">
         <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2">
-          <img src="/logo.svg" alt="Mediai Logo" class="h-8 w-8" />
+          <img
+              v-if="isDark"
+              src="/logo-dark.png"
+              alt="Dark Logo"
+              class="h-8 w-8"
+          />
+          <img
+              v-else
+              src="/logo-light.png"
+              alt="Light Logo"
+              class="h-8 w-8"
+          />
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Mediai</h1>
         </RouterLink>
 
@@ -72,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
+import {inject, ref} from 'vue';
 import { useI18n } from 'vue-i18n';
 import ProfileDropdown from './ProfileDropdown.vue';
 import { ArrowUpTrayIcon, MagnifyingGlassIcon, LightBulbIcon } from '@heroicons/vue/24/outline';
@@ -81,8 +92,10 @@ import { RouterLink } from 'vue-router';
 const emit = defineEmits(['toggle-dark', 'change-locale']);
 const { t } = useI18n();
 const openModal = inject<(type: string, data?: any) => void>('openModal');
+const isDark = ref<boolean>(localStorage.getItem('app-theme') === 'dark');
 
 function emitToggleDark() {
+  isDark.value = !isDark.value;
   emit('toggle-dark');
 }
 
