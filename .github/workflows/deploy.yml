@@ -48,4 +48,4 @@ jobs:
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./dist
-          target: /srv/pwa/dist
+          target: /srv/mediai-pwa/dist
